@@ -3,8 +3,6 @@
 (defclass main (trial:main)
   ())
 
-(defvar +player-speed+ (vec 10 10 0))
-
 (setf +app-system+ "spacepilot")
 
 (defmethod setup-scene ((main main) scene)

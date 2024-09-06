@@ -1,8 +1,9 @@
 (in-package #:spacepilot)
 
+(defvar +player-speed+ (vec 10 10 0))
+
 (define-shader-entity player (vertex-entity spaceship)
   ((location :initform (vec 0 0 0))
-   ;(vertex-array :initform (// 'spacepilot 'spaceship-mesh "ship"))
    (vertex-array :initform (// 'trial 'unit-cone))))
 
 (define-handler (player tick) (dt)
