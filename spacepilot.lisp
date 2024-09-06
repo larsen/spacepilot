@@ -5,24 +5,6 @@
 
 (defvar +player-speed+ (vec 10 10 0))
 
-(define-shader-entity bullet (vertex-entity colored-entity transformed-entity listener)
-  ((vertex-array :initform (// 'trial 'unit-sphere))
-   (color :initform (vec 0 1 1 1))
-   (velocity :initform (vec 0 0 0) :initarg :velocity :accessor velocity)))
-
-(define-handler (target-camera tick) (dt)
-  (let ((movement (directional 'camera-move)))
-    (v+ (vec4 (location target-camera) 0f0) movement)))
-
-(define-handler (star tick) (dt)
-  (nv+* (location star) (velocity star) dt))
-
-(define-handler (bullet tick) (dt)
-  (nv+* (location bullet) (velocity bullet) dt))
-
-;; (define-handler (my-cube hide) ()
-;;   (setf (vw (color my-cube)) (if (= (vw (color my-cube)) 1.0) 0.1 1.0)))
-
 (setf +app-system+ "spacepilot")
 
 (defmethod setup-scene ((main main) scene)

@@ -10,6 +10,7 @@
                (:file "spaceship")
                (:file "player")
                (:file "enemy")
+               (:file "bullet")
                (:file "star")
                (:file "spacepilot"))
   :depends-on (:trial
