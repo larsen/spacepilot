@@ -6,6 +6,7 @@
 (setf +app-system+ "spacepilot")
 
 (defmethod setup-scene ((main main) scene)
+  (enter (make-instance 'fps-counter) scene)
   (let ((player (make-instance 'player)))
     (loop repeat 1000
           do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
