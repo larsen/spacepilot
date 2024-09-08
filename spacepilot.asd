@@ -12,7 +12,7 @@
                (:file "enemy")
                (:file "bullet")
                (:file "star")
-               (:file "spacepilot"))
+               (:file "main"))
   :depends-on (:trial
                :trial-glfw
                :trial-png
