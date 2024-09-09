@@ -17,10 +17,14 @@
                      (container player))
     (nq* rot (qfrom-angle +vz+ (+ (* dt rotational-speed (vx movement)))))))
 
+(defmethod stage :after ((p player) (area staging-area))
+  (stage (// 'spacepilot-sound 'laser) area))
+
 (define-handler (player fire) ()
-                (enter (make-instance 'bullet
-                                      :location (location player)
-                                      :scaling (vec 0.1 0.1 0.1)
-                                      :velocity (nv* (q* (orientation player) +vy3+)
-                                                     15))
-                       (container player)))
+  (harmony:play (// 'spacepilot-sound 'laser))
+  (enter (make-instance 'bullet
+                        :location (location player)
+                        :scaling (vec 0.1 0.1 0.1)
+                        :velocity (nv* (q* (orientation player) +vy3+)
+                                       15))
+         (container player)))

@@ -1,6 +1,6 @@
 (in-package #:spacepilot)
 
-(defclass main (trial:main)
+(defclass main (trial-harmony:settings-main)
   ())
 
 (setf +app-system+ "spacepilot")
@@ -21,4 +21,10 @@
   (let ((*package* #.*package*))
     (load-keymap)
     (setf (active-p (action-set 'in-game)) T)
-    (apply #'trial:launch 'main args)))
+    (apply #'trial:launch 'main
+           (append args
+                   (list :context
+                         (list :title "spacepilot"
+                               :width 800
+                               :height 600
+                               :resizable nil))))))

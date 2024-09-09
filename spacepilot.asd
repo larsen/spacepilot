@@ -13,7 +13,7 @@
                (:file "bullet")
                (:file "star")
                (:file "main"))
-  :depends-on (:trial
+  :depends-on (:trial-harmony
                :trial-glfw
                :trial-png
                :trial-gltf)
