@@ -25,6 +25,5 @@
   (enter (make-instance 'bullet
                         :location (location player)
                         :scaling (vec 0.1 0.1 0.1)
-                        :velocity (nv* (q* (orientation player) +vy3+)
-                                       15))
+                        :velocity (nv* (q* (orientation player) +vy3+) 15))
          (container player)))
