@@ -15,7 +15,12 @@
     (enter (make-instance 'enemy) scene)
     (enter (make-instance '3d-camera :location (vec 0 0 -30)) scene)
     (enter (make-instance 'render-pass) scene)
-    (preload (make-instance 'bullet) scene)))
+    (preload (make-instance 'bullet) scene)
+    (preload (// 'spacepilot-music 'background-music) scene)))
+
+(define-handler (scene scene-changed) ()
+  ;; TODO it should verify it is the correct scene
+  (harmony:transition (// 'spacepilot-music 'background-music) :normal))
 
 (defun launch (&rest args)
   (let ((*package* #.*package*))
