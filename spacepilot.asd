@@ -7,6 +7,7 @@
   :components ((:file "package")
                (:file "assets")
                (:file "actions")
+               (:file "collision")
                (:file "spaceship")
                (:file "player")
                (:file "enemy")
