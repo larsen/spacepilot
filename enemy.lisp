@@ -1,8 +1,11 @@
 (in-package #:spacepilot)
 
 (define-shader-entity enemy (vertex-entity spaceship)
-  ((vertex-array :initform (// 'trial 'unit-cone))
-   (color :initform (vec 1 0 0 1))))
+  ((color :initform (vec 1 0 0 1))
+   (vertex-array :initform
+                 (nth 1 (generate-resources
+                         'model-file
+                         (asdf:system-relative-pathname 'spacepilot #p"data/enemy-spaceship.glb"))))))
 
 (defmethod initialize-instance :after ((enemy enemy) &key)
   (let* ((angle (random 360))
