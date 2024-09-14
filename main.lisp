@@ -1,11 +1,11 @@
 (in-package #:spacepilot)
 
 (defclass main (trial-harmony:settings-main)
-  ())
+  ((scene :initform (make-instance 'world))))
 
 (setf +app-system+ "spacepilot")
 
-(defmethod setup-scene ((main main) scene)
+(defmethod setup-scene ((main main) (scene world))
   (enter (make-instance 'fps-counter) scene)
   (let ((player (make-instance 'player)))
     (loop repeat 1000
@@ -18,8 +18,7 @@
     (preload (make-instance 'bullet) scene)
     (preload (// 'spacepilot-music 'background-music) scene)))
 
-(define-handler (scene scene-changed) ()
-  ;; TODO it should verify it is the correct scene
+(define-handler ((scene world) scene-changed) ()
   (harmony:transition (// 'spacepilot-music 'background-music) :normal))
 
 (defun launch (&rest args)

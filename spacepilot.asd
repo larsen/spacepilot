@@ -13,6 +13,7 @@
                (:file "enemy")
                (:file "bullet")
                (:file "star")
+               (:file "world")
                (:file "main"))
   :depends-on (:trial-harmony
                :trial-glfw
