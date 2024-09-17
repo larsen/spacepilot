@@ -7,6 +7,8 @@
 
 (defmethod setup-scene ((main main) (scene world))
   (enter (make-instance 'fps-counter) scene)
+  (enter (make-instance 'display-controller) scene)
+  (observe! (spawn-timer scene) :title "Spawn timer")
   (let ((player (make-instance 'player)))
     (loop repeat 1000
           do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
