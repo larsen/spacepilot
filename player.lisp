@@ -4,11 +4,7 @@
 
 (define-shader-entity player (vertex-entity spaceship)
   ((location :initform (vec 0 0 0))
-   (vertex-array :initform
-                 (nth 0 (generate-resources
-                         'model-file
-                         (asdf:system-relative-pathname 'spacepilot #p"data/player-spaceship.glb"))))))
-
+   (vertex-array :initform (// 'spacepilot 'player-spaceship '(:cube.002 . 0)))))
 
 (define-handler (player tick) (dt)
   (let ((movement (directional 'move))

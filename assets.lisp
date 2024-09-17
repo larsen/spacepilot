@@ -2,9 +2,11 @@
 
 (define-pool spacepilot)
 
-;; https://opengameart.org/content/3d-spaceships-pack
-(define-asset (spacepilot spaceship-mesh) model-file
-    #p"ship.glb")
+(define-asset (spacepilot player-spaceship) model-file
+    #p"player-spaceship.glb")
+
+(define-asset (spacepilot enemy-spaceship) model-file
+    #p"enemy-spaceship.glb")
 
 (define-pool spacepilot-sound :base #p"sound/")
 
