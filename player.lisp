@@ -2,7 +2,7 @@
 
 (defvar +player-speed+ (vec 10 10 0))
 
-(define-shader-entity player (vertex-entity spaceship)
+(define-shader-entity player (spaceship)
   ((location :initform (vec 0 0 0))
    (vertex-array :initform (// 'spacepilot 'player-spaceship '(:cube.002 . 0)))))
 

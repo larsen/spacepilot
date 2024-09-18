@@ -1,6 +1,6 @@
 (in-package #:spacepilot)
 
-(define-shader-entity enemy (vertex-entity spaceship)
+(define-shader-entity enemy (spaceship)
   ((color :initform (vec 1 0 0 1))
    (vertex-array :initform (// 'spacepilot 'enemy-spaceship '(:cube.004 . 1)))))
 
