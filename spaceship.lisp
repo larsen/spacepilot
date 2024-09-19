@@ -9,9 +9,6 @@
   (setf (physics-primitive spaceship)
         (make-sphere :radius 1.5 :location (location spaceship))))
 
-(define-handler (spaceship tick) (dt)
-  (nv+* (location spaceship) (velocity spaceship) dt))
-
 ;; stolen from the collision.lisp example in Trial
 (define-class-shader (spaceship :fragment-shader)
   "in vec3 v_view_position;
