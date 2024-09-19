@@ -22,12 +22,9 @@
 (define-handler ((enemy enemy) tick :after) ()
   (let* ((scene (container enemy))
          (player (node :player scene)))
-    (when (and (not (null player))
-               (intersects-p (aref (physics-primitives enemy) 0)
-                             (aref (physics-primitives player) 0)))
-      (v:info :spacepilot "Found collision. loc enemy ~a, loc player ~a"
-              (location (aref (physics-primitives enemy) 0))
-              (location (aref (physics-primitives player) 0)))
+    (when (intersects-p (aref (physics-primitives enemy) 0)
+                        (aref (physics-primitives player) 0))
+      (v:info :spacepilot "Collision between enemy and player")
       (leave enemy scene)
       ;; TODO we should actually exit the game
       (v:info :spacepilot "BOOM! Player collision"))))
