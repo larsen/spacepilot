@@ -6,7 +6,7 @@
                               transformed-entity
                               listener)
   ((vertex-array :initform (// 'trial 'unit-sphere))
-   (color :initform (vec 0 1 1 1))
+   (color :initform (vec 0 1 1 1) :initarg :color)
    (velocity :initform (vec 0 0 0) :initarg :velocity :accessor velocity)))
 
 (defmethod initialize-instance :after ((bullet bullet) &key)
@@ -24,8 +24,10 @@
                        (leave node (container bullet))))
                    (container bullet)))
 
-(defmethod fire ((spaceship spaceship))
+(defgeneric fire (spaceship &key))
+(defmethod fire ((spaceship spaceship) &key (color (vec 0 1 1 1)))
   (enter (make-instance 'bullet
+                        :color color
                         :location (location spaceship)
                         :scaling (vec 0.1 0.1 0.1)
                         :velocity (nv* (q* (orientation spaceship) +vy3+) 15))
