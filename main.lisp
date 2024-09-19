@@ -21,7 +21,7 @@
     (preload (make-instance 'bullet) scene)
     (preload (// 'spacepilot-music 'background-music) scene)))
 
-(define-handler ((scene world) scene-changed) ()
+(define-handler (world scene-changed) ()
   (harmony:transition (// 'spacepilot-music 'background-music) :normal))
 
 (defun launch (&rest args)

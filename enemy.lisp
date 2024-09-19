@@ -15,11 +15,11 @@
     (setf (physics-primitive enemy)
           (make-sphere :radius 1.5 :location location))))
 
-(define-handler ((enemy enemy) tick) (dt)
+(define-handler (enemy tick) (dt)
   (nv+* (location enemy) (v+ (velocity enemy)
                              +player-speed+) dt))
 
-(define-handler ((enemy enemy) tick :after) ()
+(define-handler (enemy tick :after) (dt)
   (let* ((scene (container enemy))
          (player (node :player scene)))
     (when (intersects-p (aref (physics-primitives enemy) 0)
