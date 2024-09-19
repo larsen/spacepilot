@@ -5,5 +5,5 @@
    (color :initform (vec 0.8 0.8 0.8 1))
    (velocity :initform +player-speed+ :initarg :velocity :accessor velocity)))
 
-(define-handler ((star star) tick) (dt)
+(define-handler (star tick) (dt)
   (nv+* (location star) (velocity star) dt))
