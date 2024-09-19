@@ -6,7 +6,8 @@
    (color :initform (vec 0 1 1 1) :initarg :color :accessor color)))
 
 (defmethod initialize-instance :after ((spaceship spaceship) &key)
-  (setf (physics-primitive spaceship) (make-sphere :radius 1.5)))
+  (setf (physics-primitive spaceship)
+        (make-sphere :radius 1.5 :location (location spaceship))))
 
 (define-handler (spaceship tick) (dt)
   (nv+* (location spaceship) (velocity spaceship) dt))

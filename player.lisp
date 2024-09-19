@@ -1,6 +1,6 @@
 (in-package #:spacepilot)
 
-(defvar +player-speed+ (vec 10 10 0))
+(defvar +player-speed+ (vec 5 5 0))
 
 (define-shader-entity player (spaceship)
   ((location :initform (vec 0 0 0))
@@ -17,7 +17,7 @@
                      (container player))
     (nq* rot (qfrom-angle +vz+ (+ (* dt rotational-speed (vx movement)))))))
 
-(defmethod stage :after ((p player) (area staging-area))
+(defmethod stage :after ((player player) (area staging-area))
   (stage (// 'spacepilot-sound 'laser) area))
 
 (define-handler (player fire) ()

@@ -12,10 +12,10 @@
 (defmethod initialize-instance :after ((bullet bullet) &key)
   (setf (physics-primitive bullet) (make-sphere :radius 0.1)))
 
-(define-handler (bullet tick) (dt)
+(define-handler ((bullet bullet) tick) (dt)
   (nv+* (location bullet) (velocity bullet) dt))
 
-(define-handler (bullet tick :after) (dt)
+(define-handler ((bullet bullet) tick :after) ()
   (map-scene-graph (lambda (node)
                      (when (and (typep node 'enemy)
                                 (intersects-p (aref (physics-primitives bullet) 0)
