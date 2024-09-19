@@ -23,3 +23,10 @@
                                               (aref (physics-primitives node) 0)))
                        (leave node (container bullet))))
                    (container bullet)))
+
+(defmethod fire ((spaceship spaceship))
+  (enter (make-instance 'bullet
+                        :location (location spaceship)
+                        :scaling (vec 0.1 0.1 0.1)
+                        :velocity (nv* (q* (orientation spaceship) +vy3+) 15))
+         (container spaceship)))

@@ -23,8 +23,4 @@
 
 (define-handler (player fire) ()
   (harmony:play (// 'spacepilot-sound 'laser))
-  (enter (make-instance 'bullet
-                        :location (location player)
-                        :scaling (vec 0.1 0.1 0.1)
-                        :velocity (nv* (q* (orientation player) +vy3+) 15))
-         (container player)))
+  (fire player))
