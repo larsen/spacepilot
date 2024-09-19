@@ -30,4 +30,4 @@
               (location (aref (physics-primitives player) 0)))
       (leave enemy scene)
       ;; TODO we should actually exit the game
-      (leave player scene))))
+      (v:info :spacepilot "BOOM! Player collision"))))

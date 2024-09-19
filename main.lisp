@@ -9,6 +9,7 @@
   (enter (make-instance 'fps-counter) scene)
   (enter (make-instance 'display-controller) scene)
   (observe! (spawn-timer scene) :title "Spawn timer")
+  (observe! +player-speed+ :title "Player speed")
   (let ((player (make-instance 'player :name :player)))
     (loop repeat 1000
           do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
