@@ -1,6 +1,16 @@
 (in-package #:spacepilot)
 
-(define-shader-entity enemy (spaceship)
+(defclass auto-fire ()
+  ((fire-timer :initform 0f0 :initarg :spawn-timer :accessor fire-timer)
+   (fire-period :initform 0.5 :initarg :fire-period)))
+
+(define-handler (auto-fire tick :after) (dt)
+  (incf (fire-timer auto-fire) dt)
+  (when (> (fire-timer auto-fire) 0.5)
+    (fire auto-fire :color (vec 1 0 0 1))
+    (setf (fire-timer auto-fire) 0)))
+
+(define-shader-entity enemy (spaceship auto-fire)
   ((color :initform (vec 1 0 0 1))
    (vertex-array :initform (// 'spacepilot 'enemy-spaceship '(:cube.004 . 1)))))
 
@@ -19,7 +29,7 @@
   (nv+* (location enemy) (v+ (velocity enemy)
                              +player-speed+) dt))
 
-(define-handler (enemy tick :after) (dt)
+(define-handler (enemy tick :after) ()
   (let* ((scene (container enemy))
          (player (node :player scene)))
     (when (intersects-p (aref (physics-primitives enemy) 0)
