@@ -19,7 +19,7 @@
     (enter (make-instance '3d-camera :location (vec 0 0 -30)) scene)
     (enter (make-instance 'render-pass) scene)
     (preload (make-instance 'enemy) scene)
-    (preload (make-instance 'bullet) scene)
+    (preload (make-instance 'bullet :target :nobody) scene)
     (preload (// 'spacepilot-music 'background-music) scene)))
 
 (define-handler (world scene-changed) ()

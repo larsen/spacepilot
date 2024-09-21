@@ -23,4 +23,4 @@
 
 (define-handler (player fire) ()
   (harmony:play (// 'spacepilot-sound 'laser))
-  (fire player))
+  (fire player 'enemy))

@@ -7,7 +7,10 @@
                               listener)
   ((vertex-array :initform (// 'trial 'unit-sphere))
    (color :initform (vec 0 1 1 1) :initarg :color)
-   (velocity :initform (vec 0 0 0) :initarg :velocity :accessor velocity)))
+   (velocity :initform (vec 0 0 0) :initarg :velocity :accessor velocity)
+   (target :initform (error "You must declare the target")
+             :initarg :target
+             :accessor target)))
 
 (defmethod initialize-instance :after ((bullet bullet) &key)
   (setf (physics-primitive bullet) (make-sphere :radius 0.1)))
@@ -18,15 +21,16 @@
 
 (define-handler (bullet tick :after) ()
   (map-scene-graph (lambda (node)
-                     (when (and (typep node 'enemy)
+                     (when (and (typep node (target bullet))
                                 (intersects-p (aref (physics-primitives bullet) 0)
                                               (aref (physics-primitives node) 0)))
                        (leave node (container bullet))))
                    (container bullet)))
 
-(defgeneric fire (spaceship &key))
-(defmethod fire ((spaceship spaceship) &key (color (vec 0 1 1 1)))
+(defgeneric fire (spaceship target &key))
+(defmethod fire ((spaceship spaceship) target &key (color (vec 0 1 1 1)))
   (enter (make-instance 'bullet
+                        :target target
                         :color color
                         :location (location spaceship)
                         :scaling (vec 0.1 0.1 0.1)

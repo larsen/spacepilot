@@ -7,7 +7,7 @@
 (define-handler (auto-fire tick :after) (dt)
   (incf (fire-timer auto-fire) dt)
   (when (> (fire-timer auto-fire) 0.5)
-    (fire auto-fire :color (vec 1 0 0 1))
+    (fire auto-fire 'player :color (vec 1 0 0 1))
     (setf (fire-timer auto-fire) 0)))
 
 (define-shader-entity enemy (spaceship auto-fire)
