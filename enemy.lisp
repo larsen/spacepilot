@@ -21,9 +21,7 @@
          (location (vxy_ (nvrand (vec3) 50))))
     (setf (location enemy) location)
     (setf (velocity enemy) velocity)
-    (setf (orientation enemy) orientation)
-    (setf (physics-primitive enemy)
-          (make-sphere :radius 1.5 :location location))))
+    (setf (orientation enemy) orientation)))
 
 (define-handler (enemy tick) (dt)
   (nv+* (location enemy) (v+ (velocity enemy)
