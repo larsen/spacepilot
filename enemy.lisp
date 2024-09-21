@@ -2,11 +2,18 @@
 
 (defclass auto-fire ()
   ((fire-timer :initform 0f0 :initarg :spawn-timer :accessor fire-timer)
-   (fire-period :initform 0.5 :initarg :fire-period)))
+   (fire-period :initform 0.5
+                :initarg :fire-period
+                :accessor fire-period)))
+
+(defmethod initialize-instance :after ((auto-fire auto-fire) &key)
+  (setf (fire-period auto-fire)
+        (+ 0.5 (/ (random 10) 10))))
 
 (define-handler (auto-fire tick :after) (dt)
   (incf (fire-timer auto-fire) dt)
-  (when (> (fire-timer auto-fire) 0.5)
+  (when (> (fire-timer auto-fire)
+           (fire-period auto-fire))
     (fire auto-fire 'player :color (vec 1 0 0 1))
     (setf (fire-timer auto-fire) 0)))
 
@@ -46,18 +53,16 @@
   (let* ((first-ship (make-instance 'enemy))
          (first-ship-location (location first-ship))
          (first-ship-orientation (orientation first-ship))
-         (direction (q* first-ship-orientation +vy3+))
-         (perpendicular (nv* (vunit (vc direction (vec3 0 0 1))) 3))
+         (first-ship-direction (q* first-ship-orientation +vy3+))
+         (perpendicular (nv* (vunit (vc first-ship-direction (vec3 0 0 1))) 3))
          (second-ship (make-instance 'enemy))
          (third-ship (make-instance 'enemy)))
     (setf (location second-ship) (v+ first-ship-location perpendicular))
     (setf (orientation second-ship) first-ship-orientation)
     (setf (velocity second-ship) (velocity first-ship))
-
     (setf (location third-ship) (v- first-ship-location perpendicular))
     (setf (orientation third-ship) first-ship-orientation)
     (setf (velocity third-ship) (velocity first-ship))
-
     (enter first-ship (scene squadron))
     (enter second-ship (scene squadron))
     (enter third-ship (scene squadron))))
