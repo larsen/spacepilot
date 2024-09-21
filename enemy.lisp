@@ -36,3 +36,28 @@
       (leave enemy scene)
       ;; TODO we should actually exit the game
       (v:info :spacepilot "BOOM! Player collision"))))
+
+(defclass squadron ()
+  ((scene :initform (error "You must provide a scene")
+          :initarg :scene
+          :accessor scene)))
+
+(defmethod initialize-instance :after ((squadron squadron) &key)
+  (let* ((first-ship (make-instance 'enemy))
+         (first-ship-location (location first-ship))
+         (first-ship-orientation (orientation first-ship))
+         (direction (q* first-ship-orientation +vy3+))
+         (perpendicular (nv* (vunit (vc direction (vec3 0 0 1))) 3))
+         (second-ship (make-instance 'enemy))
+         (third-ship (make-instance 'enemy)))
+    (setf (location second-ship) (v+ first-ship-location perpendicular))
+    (setf (orientation second-ship) first-ship-orientation)
+    (setf (velocity second-ship) (velocity first-ship))
+
+    (setf (location third-ship) (v- first-ship-location perpendicular))
+    (setf (orientation third-ship) first-ship-orientation)
+    (setf (velocity third-ship) (velocity first-ship))
+
+    (enter first-ship (scene squadron))
+    (enter second-ship (scene squadron))
+    (enter third-ship (scene squadron))))

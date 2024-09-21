@@ -14,6 +14,7 @@
 
 (define-handler (world tick :after) (dt)
   (incf (spawn-timer world) dt)
-  (when (> (spawn-timer world) 2)
+  (when (> (spawn-timer world) 3)
     (setf (spawn-timer world) 0)
-    (enter (make-instance 'enemy) world)))
+    ;; This will make each individual enemy to enter the scene
+    (make-instance 'squadron :scene world)))
