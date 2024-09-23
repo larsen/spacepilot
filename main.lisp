@@ -21,7 +21,7 @@
                                                        (vec 0 0 40)))
                     +starfield+))
     (enter player +spaceships+)
-    (enter (make-instance '3d-camera :location (vec 0 0 30)) scene)
+    (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
     (enter (make-instance 'render-pass) scene)
     (enter +spaceships+ scene)
     (enter +starfield+ scene)
