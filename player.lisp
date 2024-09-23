@@ -16,7 +16,7 @@
                        (when (typep node 'star)
                          (setf (velocity node)
                                (nv* (q* rot +vy3+) -15))))
-                     (container player))))
+                     +starfield+)))
 
 (defmethod stage :after ((player player) (area staging-area))
   (stage (// 'spacepilot-sound 'laser) area))

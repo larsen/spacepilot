@@ -10,11 +10,11 @@
     (when (and (or (typep obj 'enemy)
                    (typep obj 'bullet))
                (> (vlength (vxy_ (location obj))) 50))
-      (leave obj world))))
+      (leave obj (container obj)))))
 
 (define-handler (world tick :after) (dt)
   (incf (spawn-timer world) dt)
   (when (> (spawn-timer world) 3)
     (setf (spawn-timer world) 0)
     ;; This will make each individual enemy to enter the scene
-    (make-instance 'squadron :scene world)))
+    (make-instance 'squadron :scene +spaceships+)))

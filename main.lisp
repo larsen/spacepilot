@@ -5,19 +5,26 @@
 
 (setf +app-system+ "spacepilot")
 
+(defparameter +spaceships+ (make-instance 'bag))
+(defparameter +starfield+ (make-instance 'bag))
+
 (defmethod setup-scene ((main main) (scene world))
   (enter (make-instance 'fps-counter) scene)
   (enter (make-instance 'display-controller) scene)
   (observe! (size scene) :title "Entities in game")
+  (observe! (size +spaceships+) :title "Entities in spaceships bag")
   (observe! (spawn-timer scene) :title "Spawn timer")
   (observe! +player-speed+ :title "Player speed")
   (let ((player (make-instance 'player :name :player)))
-    (loop repeat 1000
+    (loop repeat 250
           do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
-                                                       (vec 0 0 40))) scene))
-    (enter player scene)
+                                                       (vec 0 0 40)))
+                    +starfield+))
+    (enter player +spaceships+)
     (enter (make-instance '3d-camera :location (vec 0 0 30)) scene)
     (enter (make-instance 'render-pass) scene)
+    (enter +spaceships+ scene)
+    (enter +starfield+ scene)
     (preload (make-instance 'enemy) scene)
     (preload (make-instance 'explosion) scene)
     (preload (make-instance 'bullet :target :nobody) scene)
