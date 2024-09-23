@@ -10,7 +10,7 @@
 (define-handler (player tick) (dt)
   (let ((movement (directional 'move))
         (rot (orientation player)))
-    (nq* rot (qfrom-angle +vz+ (+ (* dt (rotational-speed player) (vx movement)))))
+    (nq* rot (qfrom-angle +vz+ (- (* dt (rotational-speed player) (vx movement)))))
     (setf +player-speed+ rot)
     (map-scene-graph (lambda (node)
                        (when (typep node 'star)
