@@ -8,6 +8,11 @@
 (define-asset (spacepilot enemy-spaceship) model-file
     #p"enemy-spaceship.glb")
 
+(define-pool spacepilot-images :base #p"images/")
+
+(define-asset (spacepilot-images explosion) sprite-data
+    #p"explosion.json")
+
 (define-pool spacepilot-sound :base #p"sound/")
 
 (define-asset (spacepilot-sound laser) trial-harmony:sound

@@ -25,8 +25,13 @@
                        (when (and (typep node (target bullet))
                                   (intersects-p (aref (physics-primitives bullet) 0)
                                                 (aref (physics-primitives node) 0)))
-                         (leave node scene)
-                         (leave bullet scene)))
+                         (let ((explosion
+                                 (make-instance 'explosion
+                                                :scaling (vec 0.1 0.1 0.1)
+                                                :location (location node))))
+                           (leave node scene)
+                           (enter explosion scene)
+                           (leave bullet scene))))
                      (container bullet))))
 
 (defgeneric fire (spaceship target &key))

@@ -16,9 +16,10 @@
           do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
                                                        (vec 0 0 40))) scene))
     (enter player scene)
-    (enter (make-instance '3d-camera :location (vec 0 0 -30)) scene)
+    (enter (make-instance '3d-camera :location (vec 0 0 30)) scene)
     (enter (make-instance 'render-pass) scene)
     (preload (make-instance 'enemy) scene)
+    (preload (make-instance 'explosion) scene)
     (preload (make-instance 'bullet :target :nobody) scene)
     (preload (// 'spacepilot-music 'background-music) scene)))
 
