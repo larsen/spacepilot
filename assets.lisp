@@ -18,6 +18,9 @@
 (define-asset (spacepilot-sound laser) trial-harmony:sound
     #p"laser1.wav")
 
+(define-asset (spacepilot-sound explosion) trial-harmony:sound
+    #p"sfx_explosionNormal.ogg")
+
 (define-pool spacepilot-music :base #p"music/")
 
 (define-asset (spacepilot-music background-music) trial-harmony:environment

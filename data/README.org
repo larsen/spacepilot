@@ -11,3 +11,5 @@ Elements used so far:
 - 3D spaceship models from https://opengameart.org/content/3d-spaceships-pack
 
 - Explosion sprite from https://opengameart.org/content/explosion
+
+- Explosion sounds by [[https://hosch.itch.io][hosch]] from https://opengameart.org/content/8-bit-sound-effects-2

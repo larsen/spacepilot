@@ -31,6 +31,7 @@
                                                 :location
                                                 (nv* (location node) 10.0))))
                            (leave node scene)
+                           (harmony:play (// 'spacepilot-sound 'explosion))
                            (enter explosion scene)
                            (leave bullet scene))))
                      (container bullet))))
