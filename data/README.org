@@ -1,0 +1,13 @@
+* Assets
+
+At the moment I am not including in the repository the asset files.
+
+Elements used so far:
+
+- laser effect (for player spaceship cannon): laser1.wav by dklon from https://opengameart.org/content/laser-fire
+
+- background music from https://opengameart.org/content/another-space-background-track
+
+- 3D spaceship models from https://opengameart.org/content/3d-spaceships-pack
+
+- Explosion sprite from https://opengameart.org/content/explosion
