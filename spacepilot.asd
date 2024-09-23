@@ -8,6 +8,7 @@
                (:file "assets")
                (:file "actions")
                (:file "collision")
+               (:file "camera")
                (:file "spaceship")
                (:file "explosion")
                (:file "player")
