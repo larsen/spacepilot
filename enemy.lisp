@@ -1,8 +1,5 @@
 (in-package #:spacepilot)
 
-(define-shader-entity explosion (animated-sprite located-entity transformed-entity)
-  ((sprite-data :initform (asset 'spacepilot-images 'explosion))))
-
 (defclass auto-fire ()
   ((fire-timer :initform 0f0 :initarg :spawn-timer :accessor fire-timer)
    (fire-period :initform 0.5

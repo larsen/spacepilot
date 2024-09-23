@@ -9,6 +9,7 @@
                (:file "actions")
                (:file "collision")
                (:file "spaceship")
+               (:file "explosion")
                (:file "player")
                (:file "enemy")
                (:file "bullet")

@@ -28,7 +28,8 @@
                          (let ((explosion
                                  (make-instance 'explosion
                                                 :scaling (vec 0.1 0.1 0.1)
-                                                :location (location node))))
+                                                :location
+                                                (nv* (location node) 10.0))))
                            (leave node scene)
                            (enter explosion scene)
                            (leave bullet scene))))
