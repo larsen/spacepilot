@@ -11,3 +11,5 @@ Elements used so far:
 - Explosion sprite from https://opengameart.org/content/explosion
 
 - Explosion sounds by [[https://hosch.itch.io][hosch]] from https://opengameart.org/content/8-bit-sound-effects-2
+
+- PromptFont by Yukari "Shinmera" Hafner, available at https://shinmera.com/promptfont
