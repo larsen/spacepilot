@@ -16,8 +16,11 @@
                (:file "bullet")
                (:file "star")
                (:file "world")
+               (:file "ui")
                (:file "main"))
   :depends-on (:trial-harmony
+               :trial-alloy
+               :alloy-constraint
                :trial-glfw
                :trial-png
                :trial-gltf)

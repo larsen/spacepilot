@@ -31,10 +31,12 @@
                                                 :location
                                                 (nv* (location node) 10.0))))
                            (leave node scene)
+                           (when (typep node 'enemy)
+                             (incf (score (node :player scene)) 10))
                            (harmony:play (// 'spacepilot-sound 'explosion))
                            (enter explosion scene)
                            (leave bullet scene))))
-                     (container bullet))))
+                     scene)))
 
 (defgeneric fire (spaceship target &key))
 (defmethod fire ((spaceship spaceship) target &key (color (vec 0 1 1 1)))

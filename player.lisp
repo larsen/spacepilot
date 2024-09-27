@@ -2,10 +2,13 @@
 
 (defvar +player-speed+ (vec 5 5 0))
 
-(define-shader-entity player (spaceship)
-  ((location :initform (vec 0 0 0))
+(define-shader-entity player (spaceship alloy:observable-object)
+  ((score :initform 0 :accessor score)
+   (location :initform (vec 0 0 0))
    (rotational-speed :initform 5.0 :accessor rotational-speed)
    (vertex-array :initform (// 'spacepilot 'player-spaceship '(:cube.002 . 0)))))
+
+(alloy:make-observable '(setf money) '(value alloy:observable))
 
 (define-handler (player tick) (dt)
   (let ((movement (directional 'move))
