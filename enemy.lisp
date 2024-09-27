@@ -42,7 +42,8 @@
                              (aref (physics-primitives player) 0)))
       (v:info :spacepilot "Collision between enemy and player")
       (leave enemy scene)
-      ;; TODO we should actually exit the game
+      ;; TODO: we should actually exit the game
+      ;; or implement "lives"
       (v:info :spacepilot "BOOM! Player collision"))))
 
 (defclass squadron ()
