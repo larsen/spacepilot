@@ -17,6 +17,7 @@
                (:file "star")
                (:file "world")
                (:file "ui")
+               (:file "commands")
                (:file "main"))
   :depends-on (:trial-harmony
                :trial-alloy
