@@ -3,15 +3,23 @@
 (defclass world (pipelined-scene)
   ((enemy-spawn-timer :initform 0f0 :initarg :spawn-timer :accessor spawn-timer)))
 
+(defun ensure-player ()
+  (unless +player+
+    (setf +player+ (make-instance 'player :name :player)))
+  +player+)
+
 (defun setup-world (world)
-  (setf +spaceships+ (make-instance 'bag))
+  (clear +spaceships+)
+  (when (container +spaceships+)
+    (leave +spaceships+ (container +spaceships+)))
   (enter +spaceships+ world)
-  (enter (make-instance 'player :name :player) +spaceships+)
   (enter (init-starfield) world)
+  (enter (ensure-player) +spaceships+)
   (preload (make-instance 'enemy) world)
   (preload (make-instance 'explosion) world)
   (preload (make-instance 'bullet :target :nobody) world)
-  (preload (// 'spacepilot-music 'background-music) world))
+  (preload (// 'spacepilot-music 'background-music) world)
+  world)
 
 (define-handler (world tick :before) ()
   (do-scene-graph (obj world)

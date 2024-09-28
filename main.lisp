@@ -5,11 +5,13 @@
 
 (setf +app-system+ "spacepilot")
 
+(defparameter +player+ nil)
 (defparameter +spaceships+ (make-instance 'bag))
 (defparameter +starfield+ (make-instance 'bag))
 
 (defun init-starfield ()
-  (setf +starfield+ (make-instance 'bag))
+  (clear +starfield+)
+  (setf (container +starfield+) NIL)
   (loop repeat 250
         do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
                                                      (vec 0 0 40)))
