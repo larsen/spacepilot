@@ -30,9 +30,12 @@
                                                 :scaling (vec 0.1 0.1 0.1)
                                                 :location
                                                 (nv* (location node) 10.0))))
-                           (leave node scene)
                            (when (typep node 'enemy)
+                             (leave node scene)
                              (incf (score (node :player scene)) 10))
+                           (when (typep node 'player)
+                             (change-scene +main+ (make-instance 'world))
+                             (discard-events (scene +main+)))
                            (harmony:play (// 'spacepilot-sound 'explosion))
                            (enter explosion scene)
                            (leave bullet scene))))
@@ -40,10 +43,11 @@
 
 (defgeneric fire (spaceship target &key))
 (defmethod fire ((spaceship spaceship) target &key (color (vec 0 1 1 1)))
-  (enter (make-instance 'bullet
-                        :target target
-                        :color color
-                        :location (location spaceship)
-                        :scaling (vec 0.1 0.1 0.1)
-                        :velocity (nv* (q* (orientation spaceship) +vy3+) 15))
-         (container spaceship)))
+  (when (container spaceship)
+    (enter (make-instance 'bullet
+                          :target target
+                          :color color
+                          :location (location spaceship)
+                          :scaling (vec 0.1 0.1 0.1)
+                          :velocity (nv* (q* (orientation spaceship) +vy3+) 15))
+           (container spaceship))))

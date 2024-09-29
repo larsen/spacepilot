@@ -35,16 +35,19 @@
                              +player-speed+) dt))
 
 (define-handler (enemy tick :after) ()
-  (let* ((scene (container enemy))
-         (player (node :player scene)))
-    (when (and (not (null player))
-               (intersects-p (aref (physics-primitives enemy) 0)
-                             (aref (physics-primitives player) 0)))
-      (v:info :spacepilot "Collision between enemy and player")
-      (leave enemy scene)
-      ;; TODO: we should actually exit the game
-      ;; or implement "lives"
-      (v:info :spacepilot "BOOM! Player collision"))))
+  (let ((scene (container enemy)))
+    ;; FIXME: The scene could be NIL when we're changing scene (after
+    ;; the death of the player). Why?
+    (when scene
+      (let ((player (node :player scene)))
+        (when (and (not (null player))
+                   (intersects-p (aref (physics-primitives enemy) 0)
+                                 (aref (physics-primitives player) 0)))
+          (v:info :spacepilot "Collision between enemy and player")
+          (leave enemy scene)
+          ;; TODO: we should actually exit the game
+          ;; or implement "lives"
+          (change-scene +main+ (make-instance 'world)))))))
 
 (defclass squadron ()
   ((scene :initform (error "You must provide a scene")
@@ -52,6 +55,7 @@
           :accessor scene)))
 
 (defmethod initialize-instance :after ((squadron squadron) &key)
+  ;; TODO: change names
   (let* ((first-ship (make-instance 'enemy))
          (first-ship-location (location first-ship))
          (first-ship-orientation (orientation first-ship))
