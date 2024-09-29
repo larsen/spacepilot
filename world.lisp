@@ -20,7 +20,7 @@
           for i from 0
           ;; FIXME: how to place entities more scientifically?
           do (enter (make-instance 'player-life
-                                   :location (vec3 (+ 20 (* i 3))
+                                   :location (vec3 (+ 23 (* i 3))
                                                    18 0))
                     world))
     (preload (make-instance 'enemy) world)
