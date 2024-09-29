@@ -4,4 +4,6 @@
   (case key
     (:f1
      (change-scene +main+ (make-instance 'world))
-     (discard-events scene))))
+     (discard-events scene))
+    (:f2
+     (die (node :player +spaceships+)))))

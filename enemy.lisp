@@ -45,9 +45,7 @@
                                  (aref (physics-primitives player) 0)))
           (v:info :spacepilot "Collision between enemy and player")
           (leave enemy scene)
-          ;; TODO: we should actually exit the game
-          ;; or implement "lives"
-          (change-scene +main+ (make-instance 'world)))))))
+          (die player))))))
 
 (defclass squadron ()
   ((scene :initform (error "You must provide a scene")
