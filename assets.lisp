@@ -13,6 +13,12 @@
 (define-asset (spacepilot-images explosion) sprite-data
     #p"explosion.json")
 
+(define-asset (spacepilot player-life-tile) mesh
+    (make-rectangle-mesh 2 2))
+
+(define-asset (spacepilot-images player-life) image
+    #p"shuttle.png")
+
 (define-pool spacepilot-sound :base #p"sound/")
 
 (define-asset (spacepilot-sound laser) trial-harmony:sound

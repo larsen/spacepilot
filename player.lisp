@@ -36,3 +36,7 @@
         (v:info :spacepilot "Player lives: ~a" (lives player))
         (change-scene +main+ (make-instance 'world))
         (discard-events (scene +main+)))))
+
+(define-shader-entity player-life (vertex-entity textured-entity located-entity)
+  ((vertex-array :initform (// 'spacepilot 'player-life-tile))
+   (texture :initform (// 'spacepilot-images 'player-life))))

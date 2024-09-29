@@ -13,3 +13,5 @@ Elements used so far:
 - Explosion sounds by [[https://hosch.itch.io][hosch]] from https://opengameart.org/content/8-bit-sound-effects-2
 
 - PromptFont by Yukari "Shinmera" Hafner, available at https://shinmera.com/promptfont
+
+- Player life image from https://opengameart.org/content/simple-spaceship
