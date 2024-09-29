@@ -29,7 +29,7 @@
         (ui (make-instance 'ui))
         (combine (make-instance 'blend-pass)))
     (setup-world scene)
-    (enter (make-instance '3d-camera :location (vec 0 0 30)) scene)
+    (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
     (connect (port game 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)))
 
