@@ -5,7 +5,9 @@
    (color :initform (vec 0 1 1 1) :initarg :color :accessor color)))
 
 (define-handler (player-spaceship-for-menu tick) (tt dt)
-  (setf (orientation player-spaceship-for-menu) (qfrom-angle +vy+ tt))
+  (setf (orientation player-spaceship-for-menu)
+        (q* (qfrom-angle +vx+ (deg->rad -90))
+            (qfrom-angle +vy+ tt)))
   (let ((movement (directional 'move))
         (speed 10.0))
     (incf (vx (location player-spaceship-for-menu)) (* dt speed (- (vx movement))))
@@ -62,8 +64,6 @@
         (combine (make-instance 'blend-pass)))
     (connect (port output 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)
-    (enter (make-instance 'player-spaceship-for-menu
-                          :orientation (qfrom-angle +vx+ 90))
-           scene)
-    (enter (make-instance '3d-camera :fov 35.0 :location (vec3 0 0 15)) scene)
+    (enter (make-instance 'player-spaceship-for-menu) scene)
+    (enter (make-instance 'target-camera :fov 35.0 :location (vec3 0 5 15)) scene)
     (trial-alloy:show-panel 'main-panel)))
