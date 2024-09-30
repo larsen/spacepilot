@@ -27,7 +27,7 @@
   (observe! +player-speed+ :title "Player speed")
   (let ((game (make-instance 'render-pass))
         (ui (make-instance 'ui))
-        (combine (make-instance 'blend-pass)))
+        (combine (make-instance 'blend-pass :name 'blend-pass)))
     (setup-world scene)
     (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
     (connect (port game 'color) (port combine 'a-pass) scene)
