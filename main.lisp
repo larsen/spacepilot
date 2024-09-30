@@ -1,7 +1,7 @@
 (in-package #:spacepilot)
 
 (defclass main (trial-harmony:settings-main)
-  ((scene :initform (make-instance 'world))))
+  ((scene :initform (make-instance 'menu))))
 
 (setf +app-system+ "spacepilot")
 

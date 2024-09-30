@@ -18,7 +18,8 @@
                (:file "world")
                (:file "ui")
                (:file "commands")
-               (:file "main"))
+               (:file "main")
+               (:file "menu"))
   :depends-on (:trial-harmony
                :trial-alloy
                :alloy-constraint
