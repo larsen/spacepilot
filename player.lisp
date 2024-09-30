@@ -1,9 +1,10 @@
 (in-package #:spacepilot)
 
 (defvar +player-speed+ (vec 5 5 0))
+(defvar +player-lives+ 3)
 
 (define-shader-entity player (spaceship alloy:observable-object)
-  ((lives :initform 3 :accessor lives)
+  ((lives :initform +player-lives+ :accessor lives)
    (score :initform 0 :accessor score)
    (location :initform (vec 0 0 0))
    (rotational-speed :initform 5.0 :accessor rotational-speed)
@@ -31,7 +32,7 @@
 
 (defmethod die ((player player))
   (if (zerop (decf (lives player)))
-      (quit *context*)
+      (change-scene +main+ (make-instance 'menu))
       (progn
         (v:info :spacepilot "Player lives: ~a" (lives player))
         (change-scene +main+ (make-instance 'world))

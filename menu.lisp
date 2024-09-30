@@ -47,6 +47,7 @@
                    :focus-parent focus
                    :layout-parent menu
                    :on-activate (lambda ()
+                                  (setf +player+ NIL)
                                   (change-scene +main+ (make-instance 'world))))
     (make-instance 'menu-button
                    :value "Quit game"

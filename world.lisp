@@ -15,7 +15,7 @@
       (leave +spaceships+ (container +spaceships+)))
     (enter +spaceships+ world)
     (enter (init-starfield) world)
-    (enter (ensure-player) +spaceships+)
+    (enter player +spaceships+)
     (loop repeat (lives player)
           for i from 0
           ;; FIXME: how to place entities more scientifically?

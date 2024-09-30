@@ -43,8 +43,6 @@
   (let ((*package* #.*package*))
     (load-keymap)
     (setf (active-p (action-set 'in-game)) T)
-    ;; FIXME: is it correct to reset the player here?
-    (setf +player+ NIL)
     (apply #'trial:launch 'main
            (append args
                    (list :context
