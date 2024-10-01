@@ -33,10 +33,10 @@
     (connect (port game 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)))
 
-(define-handler (main scene-changed) ()
+(define-handler (world scene-changed) ()
   ;; FIXME: the score hud disappears after the first
   ;; player death
-  (trial-alloy:show-panel 'hud :player (node :player (scene main)))
+  (trial-alloy:show-panel 'hud :player +player+)
   (harmony:transition (// 'spacepilot-music 'background-music) :normal))
 
 (defun launch (&rest args)
