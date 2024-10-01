@@ -59,6 +59,7 @@
          (lead-direction (q* lead-orientation +vy3+))
          (perpendicular (nv* (vunit (vc lead-direction (vec3 0 0 1))) 3)))
     (enter lead (scene squadron))
+    ;; FIXME: it doesn't work when there are more than 3 ships (total)
     (loop repeat 2
           for ship = (make-instance 'enemy)
           for offset from 1

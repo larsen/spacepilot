@@ -10,6 +10,7 @@
 
 (define-pool spacepilot-images :base #p"images/")
 
+;; FIXME: transparency for explosion sprite
 (define-asset (spacepilot-images explosion) sprite-data
     #p"explosion.json")
 
