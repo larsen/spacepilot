@@ -19,21 +19,29 @@
 (define-shader-pass menu-ui (trial-alloy:base-ui)
   ())
 
+(defmethod org.shirakumo.alloy.renderers.opengl.msdf:fontcache-directory ((ui menu-ui))
+  (pool-path 'spacepilot "font-cache/"))
+
 (defclass main-panel (trial-alloy:panel)
   ())
 
 (defclass menu-button (alloy:button*)
   ())
 
+(presentations:define-realization (menu-ui menu-button)
+  ((:background simple:rectangle)
+   (alloy:extent 0 0 550 (alloy:ph 1)))
+  ((:label simple:text)
+   (alloy:margins 10 0 10 0) alloy:text
+   :font "PromptFont"
+   :halign :middle
+   :size (alloy:un 30)))
+
 (presentations:define-update (menu-ui menu-button)
   (:background
    :pattern (if alloy:focus colors:silver colors:black))
-  (:border
-   :line-width (if alloy:focus (alloy:un 10) (alloy:un 5))
-   :pattern colors:black)
   (:label
    :text alloy:text
-   :size (alloy:un 30)
    :pattern (if alloy:focus colors:black colors:white)))
 
 (defmethod initialize-instance :after ((main-panel main-panel) &key)
