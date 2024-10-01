@@ -7,3 +7,14 @@
 
 (define-handler (star tick) (dt)
   (nv+* (location star) (velocity star) dt))
+
+(defparameter +starfield+ (make-instance 'bag))
+
+(defun init-starfield ()
+  (clear +starfield+)
+  (setf (container +starfield+) NIL)
+  (loop repeat 500
+        do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
+                                                     (vec 0 0 -40)))
+                  +starfield+)
+        finally (return +starfield+)))
