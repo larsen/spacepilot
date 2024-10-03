@@ -16,12 +16,7 @@
   (let ((movement (directional 'move))
         (rot (orientation player)))
     (nq* rot (qfrom-angle +vz+ (- (* dt (rotational-speed player) (vx movement)))))
-    (setf +player-speed+ rot)
-    (map-scene-graph (lambda (node)
-                       (when (typep node 'star)
-                         (setf (velocity node)
-                               (nv* (q* rot +vy3+) -15))))
-                     +starfield+)))
+    (setf +player-speed+ rot)))
 
 (defmethod stage :after ((player player) (area staging-area))
   (stage (// 'spacepilot-sound 'laser) area))
