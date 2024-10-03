@@ -70,7 +70,7 @@
 (defmethod setup-scene ((main main) (scene menu))
   (let ((output (make-instance 'render-pass))
         (ui (make-instance 'menu-ui))
-        (combine (make-instance 'blend-pass)))
+        (combine (make-instance 'blend-pass :name 'blend-pass)))
     (connect (port output 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)
     (enter (make-instance 'player-spaceship-for-menu) scene)

@@ -6,4 +6,12 @@
      (change-scene +main+ (make-instance 'world))
      (discard-events scene))
     (:f2
-     (die (node :player +spaceships+)))))
+     (die (node :player +spaceships+)))
+    (:f3
+     (let ((fbo (flow:node (flow:left (first (flow:connections
+                                    (port (node 'blend-pass scene) 'a-pass))))))
+           (path (make-pathname :name (format-timestring :as :filename)
+                                :type "png"
+                                :defaults (user-homedir-pathname))))
+       (save-image fbo path T)
+       (v:info :spacepilot "Saved screenshot to ~a" path)))))
