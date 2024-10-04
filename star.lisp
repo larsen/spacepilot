@@ -6,7 +6,7 @@
    (velocity :initform +player-speed+ :initarg :velocity :accessor velocity)))
 
 (define-handler (star tick) (dt)
-  (nv+* (location star) (velocity star) (* 1 dt)))
+  (nv+* (location star) (velocity star) dt))
 
 (defclass starfield (bag listener)
   ((star-count :initform 100 :initarg :star-count :accessor star-count)))
