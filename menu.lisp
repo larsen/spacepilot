@@ -74,6 +74,5 @@
     (connect (port output 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)
     (enter (make-instance 'player-spaceship-for-menu) scene)
-    (enter (make-instance 'starfield :star-count 500) scene)
     (enter (make-instance 'target-camera :fov 35.0 :location (vec3 0 5 15)) scene)
     (trial-alloy:show-panel 'main-panel)))
