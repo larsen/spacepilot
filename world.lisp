@@ -14,7 +14,7 @@
     (when (container +spaceships+)
       (leave +spaceships+ (container +spaceships+)))
     (enter +spaceships+ world)
-    (enter (init-starfield) world)
+    (enter (make-instance 'starfield :star-count 500) world)
     (enter player +spaceships+)
     (loop repeat (lives player)
           for i from 0
