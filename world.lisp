@@ -16,13 +16,6 @@
     (enter +spaceships+ world)
     (enter (make-instance 'starfield :star-count 500) world)
     (enter player +spaceships+)
-    (loop repeat (lives player)
-          for i from 0
-          ;; FIXME: how to place entities more scientifically?
-          do (enter (make-instance 'player-life
-                                   :location (vec3 (+ 23 (* i 3))
-                                                   18 0))
-                    world))
     (preload (make-instance 'enemy) world)
     (preload (make-instance 'explosion) world)
     (preload (make-instance 'bullet :target :nobody) world)
