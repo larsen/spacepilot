@@ -30,8 +30,8 @@
       (change-scene +main+ (make-instance 'menu))
       (progn
         (v:info :spacepilot "Player lives: ~a" (lives player))
-        (change-scene +main+ (make-instance 'world))
-        (discard-events (scene +main+)))))
+        (discard-events (scene +main+))
+        (change-scene +main+ (make-instance 'world)))))
 
 (define-shader-entity player-life (vertex-entity textured-entity located-entity)
   ((vertex-array :initform (// 'spacepilot 'player-life-tile))
