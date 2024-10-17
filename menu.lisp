@@ -44,9 +44,26 @@
    :text alloy:text
    :pattern (if alloy:focus colors:black colors:white)))
 
+(defclass title (alloy:direct-value-component alloy:label)
+  ())
+
+(presentations:define-realization (menu-ui title)
+  ((label simple:text)
+   (alloy:margins -10)
+   alloy:text
+   :size (alloy:un 80)
+   :font "PromptFont"
+   :pattern colors:white
+   :halign :center
+   :valign :top))
+
+(presentations:define-update (menu-ui title)
+  (label :text alloy:value))
+
 (defmethod initialize-instance :after ((main-panel main-panel) &key)
   (let* ((layout (make-instance 'org.shirakumo.alloy.layouts.constraint:layout))
          (focus (make-instance 'alloy:focus-list))
+         (title (make-instance 'title :value "SPACEPILOT"))
          (menu (make-instance 'alloy:vertical-linear-layout
                               :cell-margins (alloy:margins 5)
 							                :min-size (alloy:size 120 30))))
@@ -63,6 +80,7 @@
                    :layout-parent menu
                    :on-activate (lambda ()
                                   (quit *context*)))
+    (alloy:enter title layout :constraints `((:center :w) (:top 100)))
     (alloy:enter menu layout
                  :constraints `((:center :w) (:bottom 20) (:height 350) (:width 550)))
     (alloy:finish-structure main-panel layout focus)))
