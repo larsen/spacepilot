@@ -31,6 +31,8 @@
     (setf (orientation enemy) orientation)))
 
 (define-handler (enemy tick) (dt)
+  (when +debug+
+    (debug-draw (aref (physics-primitives enemy) 0)))
   (nv+* (location enemy) (v+ (velocity enemy)
                              +player-speed+) dt))
 

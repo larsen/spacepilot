@@ -13,6 +13,8 @@
 (alloy:make-observable '(setf money) '(value alloy:observable))
 
 (define-handler (player tick) (dt)
+  (when +debug+
+    (debug-draw (aref (physics-primitives player) 0)))
   (let ((movement (directional 'move))
         (rot (orientation player)))
     (nq* rot (qfrom-angle +vz+ (- (* dt (rotational-speed player) (vx movement)))))
