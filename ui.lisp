@@ -47,9 +47,9 @@
     (loop repeat (lives player)
           for i from 0
           do (alloy:enter (make-instance 'icon :value (// 'spacepilot-images 'player-life))
-                          layout :constraints `((:right (+ 350 (* ,i 50)))
-                                                (:top 200)
-                                                (:size 60 60))))
+                          layout :constraints `((:right (+ 30 (* ,i 90)))
+                                                (:top 100)
+                                                (:size 80 80))))
     (alloy:enter (alloy:represent (score player) 'score-display)
                  layout :constraints `((:right 30) (:top 30) (:size 100 50)))
     (alloy:finish-structure hud layout NIL)))
