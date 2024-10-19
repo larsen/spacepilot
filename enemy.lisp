@@ -33,9 +33,14 @@
 
 (define-handler (enemy tick) (dt)
   (when +debug+
-    (debug-draw (aref (physics-primitives enemy) 0)))
-  (nv+* (location enemy) (v+ (velocity enemy)
-                             +player-speed+) dt))
+    (debug-draw (aref (physics-primitives enemy) 0))
+    (debug-text (v* (location enemy) 10.0)
+                (name enemy)
+                :scale 0.1))
+  (nv+* (location enemy)
+        ;; FIXME: HACK!
+        (vxy_ (v+ (velocity enemy)
+                  +player-speed+)) dt))
 
 (define-handler (enemy tick :after) ()
   (let ((scene (container enemy)))
