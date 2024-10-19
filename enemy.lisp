@@ -19,6 +19,7 @@
 
 (define-shader-entity enemy (spaceship auto-fire)
   ((color :initform (vec 1 0 0 1))
+   (name :initform (string (gensym)))
    (vertex-array :initform (// 'spacepilot 'enemy-spaceship '(:cube.004 . 1)))))
 
 (defmethod initialize-instance :after ((enemy enemy) &key)
