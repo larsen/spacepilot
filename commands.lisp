@@ -14,4 +14,10 @@
                                 :type "png"
                                 :defaults (user-homedir-pathname))))
        (save-image fbo path T)
-       (v:info :spacepilot "Saved screenshot to ~a" path)))))
+       (v:info :spacepilot "Saved screenshot to ~a" path)))
+    (:f10
+     (pause +main+))
+    (:f11
+     (setf (game-speed +main+) 0.1))
+    (:f12
+     (setf (game-speed +main+) 1))))

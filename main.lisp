@@ -1,13 +1,18 @@
 (in-package #:spacepilot)
 
 (defclass main (trial-harmony:settings-main)
-  ((scene :initform (make-instance 'menu))))
+  ((game-speed :initform 1 :accessor game-speed)
+   (paused :initform nil :accessor paused)
+   (scene :initform (make-instance 'menu))))
 
 (setf +app-system+ "spacepilot")
 
 (defparameter +debug+ T)
 (defparameter +player+ nil)
 (defparameter +spaceships+ (make-instance 'bag))
+
+(defmethod pause ((main main))
+  (setf (paused main) (if (paused main) nil T)))
 
 (defmethod setup-scene ((main main) (scene world))
   (enter (make-instance 'fps-counter) scene)
@@ -23,6 +28,17 @@
     (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
     (connect (port game 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)))
+
+(defmethod update ((main main) tt dt fc)
+  (let ((scene (scene main))
+        (dt (* (game-speed main) dt)))
+    (cond ((paused main)
+           (handle (make-event 'tick :tt tt :dt dt :fc fc) (camera (scene main))))
+          (T
+           (issue scene 'pre-tick :tt tt :dt dt :fc fc)
+           (issue scene 'tick :tt tt :dt dt :fc fc)
+           (issue scene 'post-tick :tt tt :dt dt :fc fc)))
+    (process scene))))
 
 (define-handler (world scene-changed) ()
   (trial-alloy:show-panel 'hud :player +player+)
