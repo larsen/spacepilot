@@ -28,7 +28,9 @@
   (fire player 'enemy))
 
 (defmethod die ((player player))
-  (if (zerop (decf (lives player)))
+  (unless +debug+
+    (decf (lives player)))
+  (if (zerop (lives player))
       (change-scene +main+ (make-instance 'menu))
       (progn
         (v:info :spacepilot "Player lives: ~a" (lives player))
