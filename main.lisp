@@ -38,7 +38,7 @@
            (issue scene 'pre-tick :tt tt :dt dt :fc fc)
            (issue scene 'tick :tt tt :dt dt :fc fc)
            (issue scene 'post-tick :tt tt :dt dt :fc fc)))
-    (process scene))))
+    (process scene)))
 
 (define-handler (world scene-changed) ()
   (trial-alloy:show-panel 'hud :player +player+)
