@@ -1,6 +1,6 @@
 (in-package #:spacepilot)
 
-(define-shader-entity spaceship (vertex-entity collision-body transformed-entity colored-entity listener)
+(define-shader-entity spaceship (vertex-entity collision-body colored-entity listener)
   ((velocity :initform (vec 0 0 0) :initarg :velocity :accessor velocity)
    (vertex-array :initform (// 'trial 'unit-sphere))
    (color :initform (vec 0 1 1 1) :initarg :color :accessor color)))

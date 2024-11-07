@@ -3,7 +3,6 @@
 (define-shader-entity bullet (vertex-entity
                               collision-body
                               colored-entity
-                              transformed-entity
                               listener)
   ((vertex-array :initform (// 'trial 'unit-sphere))
    (color :initform (vec 0 1 1 1) :initarg :color)
