@@ -12,7 +12,7 @@
              :accessor target)))
 
 (defmethod initialize-instance :after ((bullet bullet) &key)
-  (setf (physics-primitive bullet) (make-sphere :radius 0.1)))
+  (setf (physics-primitive bullet) (make-sphere :radius 0.2)))
 
 (define-handler (bullet tick) (dt)
   (nv+* (location bullet) (v+ (velocity bullet)
