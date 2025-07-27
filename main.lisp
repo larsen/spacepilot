@@ -7,7 +7,7 @@
 
 (setf +app-system+ "spacepilot")
 
-(defparameter +debug+ T)
+(defparameter +debug+ nil)
 (defparameter +player+ nil)
 (defparameter +spaceships+ (make-instance 'bag))
 
