@@ -21,7 +21,7 @@
   (observe! (size +spaceships+) :title "Entities in spaceships bag")
   (observe! (spawn-timer scene) :title "Spawn timer")
   (observe! +player-speed+ :title "Player speed")
-  (let ((game (make-instance 'render-pass))
+  (let ((game (make-instance 'pbr-render-pass))
         (ui (make-instance 'ui))
         (combine (make-instance 'blend-pass :name 'blend-pass)))
     (setup-world scene)

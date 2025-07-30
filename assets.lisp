@@ -20,6 +20,9 @@
 (define-asset (spacepilot-images player-life) image
     #p"shuttle.png")
 
+(define-asset (spacepilot-images exhaust-emitter) image
+    #p"exhaust.png")
+
 (define-pool spacepilot-sound :base #p"sound/")
 
 (define-asset (spacepilot-sound laser) trial-harmony:sound

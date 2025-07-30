@@ -14,6 +14,7 @@
                (:file "player")
                (:file "enemy")
                (:file "bullet")
+               (:file "exhaust")
                (:file "star")
                (:file "world")
                (:file "ui")
