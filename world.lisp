@@ -16,14 +16,7 @@
     (enter +spaceships+ world)
     (enter (make-instance 'starfield :star-count 500) world)
     (enter player +spaceships+)
-    (enter (make-instance 'engine-exhaust
-                          :emitted-by player
-                          :max-particles 100 :particle-rate 60
-                          :texture (// 'spacepilot-images 'exhaust-emitter)
-                          :particle-force-fields `((:type :direction :strength 5.0)
-                                                   (:type :vortex :strength 10.0))
-                          :particle-options `(:velocity 5.0 :randomness 0.5 :size 1.1 :scaling 3.0
-                                              :lifespan 3.0 :lifespan-randomness 0.5)) world)
+    (enter (make-instance 'engine-exhaust :emitted-by player) world)
     (preload (make-instance 'enemy) world)
     (preload (make-instance 'explosion) world)
     (preload (make-instance 'bullet :target :nobody) world)
