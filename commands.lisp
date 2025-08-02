@@ -2,6 +2,10 @@
 
 (define-handler (scene key-press :after) (key)
   (case key
+    (:minus
+     (incf (vz (location (camera scene)))))
+    (:equal
+     (decf (vz (location (camera scene)))))
     (:f1
      (change-scene +main+ (make-instance 'world))
      (discard-events scene))
@@ -9,7 +13,7 @@
      (die (node :player +spaceships+)))
     (:f3
      (let ((fbo (flow:node (flow:left (first (flow:connections
-                                    (port (node 'blend-pass scene) 'a-pass))))))
+                                              (port (node 'blend-pass scene) 'a-pass))))))
            (path (make-pathname :name (format-timestring :as :filename)
                                 :type "png"
                                 :defaults (user-homedir-pathname))))
