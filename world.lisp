@@ -17,7 +17,7 @@
     (enter (make-instance 'starfield :star-count 500) world)
     (enter player +spaceships+)
     (enter (make-instance 'engine-exhaust :emitted-by player
-                                          :vertex-array (// 'spacepilot 'player-spaceship ':exhaust)) world)
+                                          :vertex-array (// 'spacepilot 'player-spaceship ':exhaust)) +spaceships+)
     (preload (make-instance 'enemy) world)
     (preload (make-instance 'explosion) world)
     (preload (make-instance 'bullet :target :nobody) world)
