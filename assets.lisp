@@ -21,7 +21,7 @@
     #p"shuttle.png")
 
 (define-asset (spacepilot-images exhaust-emitter) image
-    #p"exhaust.png")
+    #p"exhaust2.png")
 
 (define-pool spacepilot-sound :base #p"sound/")
 

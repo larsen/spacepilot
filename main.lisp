@@ -16,7 +16,7 @@
 
 (defmethod setup-scene ((main main) (scene world))
   (enter (make-instance 'fps-counter) scene)
-  (enter (make-instance 'display-controller) scene)
+  ;; (enter (make-instance 'display-controller) scene)
   (observe! (size scene) :title "Entities in game")
   (observe! (size +spaceships+) :title "Entities in spaceships bag")
   (observe! (spawn-timer scene) :title "Spawn timer")
