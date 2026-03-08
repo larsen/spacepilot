@@ -31,7 +31,9 @@
   (unless +debug+
     (decf (lives player)))
   (if (zerop (lives player))
-      (change-scene +main+ (make-instance 'menu))
+      (progn
+        (discard-events (scene +main+))
+        (change-scene +main+ (make-instance 'menu)))
       (progn
         (v:info :spacepilot "Player lives: ~a" (lives player))
         (discard-events (scene +main+))
