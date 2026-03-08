@@ -1,7 +1,7 @@
 (in-package #:spacepilot)
 
 (define-shader-entity player-spaceship-for-menu (spaceship)
-  ((vertex-array :initform (// 'spacepilot 'player-spaceship '(:cube.002 . 0)))
+  ((vertex-array :initform (// 'spacepilot 'player-spaceship '(0 . 0)))
    (color :initform (vec 0 1 1 1) :initarg :color :accessor color)))
 
 (define-handler (player-spaceship-for-menu tick) (tt dt)

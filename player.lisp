@@ -8,7 +8,7 @@
    (score :initform 0 :accessor score)
    (location :initform (vec 0 0 0))
    (rotational-speed :initform 5.0 :accessor rotational-speed)
-   (vertex-array :initform (// 'spacepilot 'player-spaceship '(:cube.002 . 0)))))
+   (vertex-array :initform (// 'spacepilot 'player-spaceship '(0 . 0)))))
 
 (alloy:make-observable '(setf money) '(value alloy:observable))
 
