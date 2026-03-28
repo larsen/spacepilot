@@ -11,7 +11,12 @@
 (defclass starfield (bag listener)
   ((star-count :initform 100 :initarg :star-count :accessor star-count)))
 
+(defgeneric init-starfield (starfield))
+
 (defmethod initialize-instance :after ((starfield starfield) &key)
+  (init-starfield starfield))
+
+(defmethod init-starfield ((starfield starfield))
   (loop repeat (star-count starfield)
         do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
                                                      (vec 0 0 -40)))
@@ -23,3 +28,16 @@
                        (setf (velocity node)
                              (nv* (q* +player-speed+ +vy3+) -15))))
                    starfield))
+
+(defclass starfield-menu (starfield)
+  ())
+
+(defmethod init-starfield ((starfield starfield-menu))
+  (loop repeat (star-count starfield)
+        do (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
+                                                     (vec 0 0 -40))
+                                       :velocity (vec 0 0 50))
+                  starfield)))
+
+(define-handler (starfield-menu tick) ()
+  )

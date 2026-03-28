@@ -20,7 +20,8 @@
                (:file "ui")
                (:file "commands")
                (:file "main")
-               (:file "menu"))
+               (:file "menu")
+               (:file "settings"))
   :depends-on (:trial-harmony
                :trial-alloy
                :alloy-constraint

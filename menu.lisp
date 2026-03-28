@@ -75,6 +75,13 @@
                                   (setf +player+ NIL)
                                   (change-scene +main+ (make-instance 'world))))
     (make-instance 'menu-button
+                   :value "Settings"
+                   :focus-parent focus
+                   :layout-parent menu
+                   :on-activate (lambda ()
+                                  (setf +player+ NIL)
+                                  (change-scene +main+ (make-instance 'settings))))
+    (make-instance 'menu-button
                    :value "Quit game"
                    :focus-parent focus
                    :layout-parent menu
