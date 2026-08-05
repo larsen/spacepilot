@@ -40,4 +40,15 @@
                   starfield)))
 
 (define-handler (starfield-menu tick) ()
-  )
+  (do-scene-graph (obj starfield-menu)
+    ;; We should use proper frustum culling, but at the moment these checks don't work
+    ;; (not (in-view-p obj (camera starfield-menu)))
+    (when (and (or (typep obj 'enemy)
+                   (typep obj 'bullet))
+               (> (vlength (vxy_ (location obj))) 50))
+      (leave obj (container obj))
+      ;; Replace the stat
+      (enter (make-instance 'star :location (v+ (vrand 0f0 1000.0)
+                                                (vec 0 0 -40))
+                                  :velocity (vec 0 0 50))
+             starfield-menu))))
