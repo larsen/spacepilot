@@ -3,45 +3,11 @@
 (defclass settings (pipelined-scene)
   ())
 
-(define-shader-pass settings-ui (trial-alloy:base-ui)
+(define-shader-pass settings-ui (spacepilot-ui)
   ())
-
-;; TODO: should I repeat this?
-(defmethod org.shirakumo.alloy.renderers.opengl.msdf:fontcache-directory ((ui settings-ui))
-  (pool-path 'spacepilot "font-cache/"))
 
 (defclass settings-panel (trial-alloy:panel)
   ())
-
-(presentations:define-realization (settings-ui menu-button)
-  ((:background simple:rectangle)
-   (alloy:extent 0 0 550 (alloy:ph 1)))
-  ((:label simple:text)
-   (alloy:margins 10 0 10 0) alloy:text
-   :font "PromptFont"
-   :halign :middle
-   :size (alloy:un 30)))
-
-(presentations:define-update (settings-ui menu-button)
-  (:background
-   :pattern (if alloy:focus colors:silver colors:black))
-  (:label
-   :text alloy:text
-   :pattern (if alloy:focus colors:black colors:white)))
-
-;; TODO: Should I repeat this?
-(presentations:define-realization (settings-ui title)
-  ((label simple:text)
-   (alloy:margins -10)
-   alloy:text
-   :size (alloy:un 80)
-   :font "PromptFont"
-   :pattern colors:white
-   :halign :center
-   :valign :top))
-
-(presentations:define-update (settings-ui title)
-  (label :text alloy:value))
 
 (defmethod initialize-instance :after ((settings-panel settings-panel) &key)
   (let* ((layout (make-instance 'org.shirakumo.alloy.layouts.constraint:layout))
