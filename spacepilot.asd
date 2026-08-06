@@ -21,6 +21,7 @@
                (:file "commands")
                (:file "main")
                (:file "menu")
+               (:file "settings")
                (:file "settings"))
   :depends-on (:trial-harmony
                :trial-alloy
