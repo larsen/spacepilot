@@ -17,10 +17,13 @@
                              (:file "star")))
                (:file "explosion")
                (:file "world")
-               (:file "ui")
                (:file "commands")
                (:file "main")
-               (:file "menu"))
+               (:module "ui"
+                :components ((:file "general")
+                             (:file "main-menu")
+                             (:file "settings")
+                             (:file "hud"))))
   :depends-on (:trial-harmony
                :trial-alloy
                :alloy-constraint

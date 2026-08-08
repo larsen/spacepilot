@@ -16,49 +16,11 @@
 (defclass menu (pipelined-scene)
   ())
 
-(define-shader-pass menu-ui (trial-alloy:base-ui)
+(define-shader-pass menu-ui (spacepilot-ui)
   ())
-
-(defmethod org.shirakumo.alloy.renderers.opengl.msdf:fontcache-directory ((ui menu-ui))
-  (pool-path 'spacepilot "font-cache/"))
 
 (defclass main-panel (trial-alloy:panel)
   ())
-
-(defclass menu-button (alloy:button*)
-  ())
-
-(presentations:define-realization (menu-ui menu-button)
-  ((:background simple:rectangle)
-   (alloy:extent 0 0 550 (alloy:ph 1)))
-  ((:label simple:text)
-   (alloy:margins 10 0 10 0) alloy:text
-   :font "PromptFont"
-   :halign :middle
-   :size (alloy:un 30)))
-
-(presentations:define-update (menu-ui menu-button)
-  (:background
-   :pattern (if alloy:focus colors:silver colors:black))
-  (:label
-   :text alloy:text
-   :pattern (if alloy:focus colors:black colors:white)))
-
-(defclass title (alloy:direct-value-component alloy:label)
-  ())
-
-(presentations:define-realization (menu-ui title)
-  ((label simple:text)
-   (alloy:margins -10)
-   alloy:text
-   :size (alloy:un 80)
-   :font "PromptFont"
-   :pattern colors:white
-   :halign :center
-   :valign :top))
-
-(presentations:define-update (menu-ui title)
-  (label :text alloy:value))
 
 (defmethod initialize-instance :after ((main-panel main-panel) &key)
   (let* ((layout (make-instance 'org.shirakumo.alloy.layouts.constraint:layout))
@@ -74,6 +36,13 @@
                    :on-activate (lambda ()
                                   (setf +player+ NIL)
                                   (change-scene +main+ (make-instance 'world))))
+    (make-instance 'menu-button
+                   :value "Settings"
+                   :focus-parent focus
+                   :layout-parent menu
+                   :on-activate (lambda ()
+                                  (setf +player+ NIL)
+                                  (change-scene +main+ (make-instance 'settings))))
     (make-instance 'menu-button
                    :value "Quit game"
                    :focus-parent focus
