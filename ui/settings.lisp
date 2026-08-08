@@ -16,6 +16,10 @@
          (menu (make-instance 'alloy:vertical-linear-layout
                               :cell-margins (alloy:margins 5)
 							                :min-size (alloy:size 120 30))))
+    (alloy:represent "Music Volume" 'setting-label :focus-parent focus :layout-parent menu)
+    (alloy:represent (setting :audio :volume :master)
+     'alloy:ranged-slider :range '(0.0 . 1.0) :step 0.1
+                          :focus-parent focus :layout-parent menu)
     (make-instance 'menu-button
                    :value "Back"
                    :focus-parent focus
@@ -46,4 +50,8 @@
     (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
     (connect (port game 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)
-    (trial-alloy:show-panel 'settings-panel)))
+    (trial-alloy:show-panel 'settings-panel)
+    (preload (// 'spacepilot-music 'background-music) scene)))
+
+(define-handler (settings scene-changed) ()
+  (harmony:transition (// 'spacepilot-music 'background-music) :normal))

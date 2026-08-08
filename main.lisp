@@ -5,6 +5,7 @@
    (paused :initform nil :accessor paused)
    (scene :initform (make-instance 'menu))))
 
+(setf +app-vendor+ "larsen")
 (setf +app-system+ "spacepilot")
 
 (defparameter +debug+ nil)
@@ -46,6 +47,14 @@
 
 (defun launch (&rest args)
   (let ((*package* #.*package*))
+    (setf +settings+
+          (copy-tree '(:audio (:latency 0.005
+                               :backend :default
+                               :device :default
+                               :volume (:master 1.0
+                                        :effect 1.0
+                                        :music 1.0)))))
+    (load-settings)
     (load-keymap)
     (setf (active-p (action-set 'in-game)) T)
     (apply #'trial:launch 'main

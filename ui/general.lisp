@@ -22,6 +22,22 @@
 (presentations:define-update (spacepilot-ui title)
   (label :text alloy:value))
 
+(defclass setting-label (alloy:label)
+  ())
+
+(presentations:define-realization (spacepilot-ui setting-label)
+  ((label simple:text)
+   (alloy:margins -10)
+   alloy:text
+   :size (alloy:un 30)
+   :font "PromptFont"
+   :pattern colors:white
+   :halign :center
+   :valign :top))
+
+(presentations:define-update (spacepilot-ui setting-label)
+  (label :text alloy:value))
+
 (defclass menu-button (alloy:button*)
   ())
 
