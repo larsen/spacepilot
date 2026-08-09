@@ -38,6 +38,26 @@
 (presentations:define-update (spacepilot-ui setting-label)
   (label :text alloy:value))
 
+(defclass score-label (alloy:direct-value-component alloy:label)
+  ())
+
+(presentations:define-realization (spacepilot-ui score-label)
+  ((label simple:text)
+   (alloy:margins -10)
+   alloy:text
+   :size (alloy:un 30)
+   :font "PromptFont"
+   :pattern colors:white
+   :halign :center
+   :valign :top))
+
+(presentations:define-update (spacepilot-ui score-label)
+  (label :text alloy:value))
+
+(defmethod show ((label score-label) &key)
+  (unless (alloy:layout-tree label)
+    (alloy:enter label (alloy:popups (alloy:layout-tree (node 'ui-pass T))))))
+
 (defclass menu-button (alloy:button*)
   ())
 

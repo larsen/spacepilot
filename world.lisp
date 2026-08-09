@@ -37,3 +37,8 @@
     (setf (spawn-timer world) 0)
     ;; This will make each individual enemy to enter the scene
     (make-instance 'squadron :scene +spaceships+)))
+
+(defun world-screen-pos (pos)
+  (let ((camera (camera +world+)))
+    (let ((pos (v+ pos (v/ (target-size camera) (zoom camera)))))
+      (v* (nv- pos (location camera)) (view-scale camera) (zoom camera)))))
