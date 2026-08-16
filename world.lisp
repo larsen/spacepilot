@@ -42,5 +42,6 @@
   ;; TODO: it should also work in 3d, if I want to implement an
   ;; alternative POV with a 3d camera
   (let ((camera (camera (scene +main+))))
-    (let ((pos (v+ pos (v/ (vec2 800 600) 2))))
+    (let ((pos (v+ pos (v/ (vec2 (width *context*)
+                                 (height *context*)) 2))))
       (v* (nv- pos (vxy (location camera))) 1.0 1))))
