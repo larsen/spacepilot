@@ -39,7 +39,7 @@
    alloy:text
    :size (alloy:un 25)
    :font "PromptFont"
-   :pattern colors:white
+   :pattern (chroma:color 1 1 1 1)
    :halign :center
    :valign :top))
 
