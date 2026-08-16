@@ -58,9 +58,7 @@
     (load-keymap)
     (setf (active-p (action-set 'in-game)) T)
     (apply #'trial:launch 'main
-           (append args
-                   (list :context
-                         (list :title "spacepilot"
-                               :width 800
-                               :height 600
-                               :resizable nil))))))
+           (append args '(:context (:title "spacepilot"
+                                    :width 800
+                                    :height 600
+                                    :resizable nil))))))
