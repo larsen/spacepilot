@@ -39,6 +39,8 @@
     (make-instance 'squadron :scene +spaceships+)))
 
 (defun world-screen-pos (pos)
-  (let ((camera (camera +world+)))
-    (let ((pos (v+ pos (v/ (target-size camera) (zoom camera)))))
-      (v* (nv- pos (location camera)) (view-scale camera) (zoom camera)))))
+  ;; TODO: it should also work in 3d, if I want to implement an
+  ;; alternative POV with a 3d camera
+  (let ((camera (camera (scene +main+))))
+    (let ((pos (v+ pos (v/ (vec2 800 600) 2))))
+      (v* (nv- pos (vxy (location camera))) 1.0 1))))

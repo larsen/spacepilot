@@ -20,6 +20,7 @@
 (define-shader-entity enemy (spaceship auto-fire)
   ((color :initform (vec 1 0 0 1))
    (name :initform (string (gensym)))
+   (score-value :initform 10 :accessor score-value)
    (score-label :initform nil :accessor score-label)
    (vertex-array :initform (// 'spacepilot 'enemy-spaceship '(0 . 1)))))
 
@@ -30,7 +31,9 @@
          (location (vxy_ (nvrand (vec3) 50))))
     (setf (location enemy) location)
     (setf (velocity enemy) velocity)
-    (setf (orientation enemy) orientation)))
+    (setf (orientation enemy) orientation)
+    (setf (score-label enemy)
+          (make-instance 'score-label :value enemy))))
 
 (define-handler (enemy tick) (dt)
   (when +debug+
@@ -76,5 +79,4 @@
                    (v+ lead-location (nv* perpendicular offset)))
              (setf (orientation ship) lead-orientation)
              (setf (velocity ship) (velocity lead))
-             (enter ship (scene squadron))
-             (setf (score-label ship) (make-instance 'score-label :value ship)))))
+             (enter ship (scene squadron)))))
