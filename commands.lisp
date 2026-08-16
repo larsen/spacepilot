@@ -19,6 +19,11 @@
                                 :defaults (user-homedir-pathname))))
        (save-image fbo path T)
        (v:info :spacepilot "Saved screenshot to ~a" path)))
+    (:f8
+     (if (and (= (width (current-monitor *context*)) (width *context*))
+              (= (height (current-monitor *context*)) (height *context*)))
+         (show *context* :fullscreen NIL :mode '(800 600))
+         (show *context* :fullscreen T)))
     (:f10
      (pause +main+))
     (:f11
