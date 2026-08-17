@@ -29,9 +29,13 @@
   (label
    :text alloy:text))
 
-
 (defclass score-label (alloy:direct-value-component alloy:label)
-  ())
+  ((timeout :initarg :timeout :initform 5.0 :accessor timeout)))
+
+(defmethod animation:update :after ((label score-label) dt)
+  (when (< 0.0 (timeout element))
+    (decf (timeout label) dt)
+    (alloy:mark-for-render label)))
 
 (presentations:define-realization (ui score-label)
   ((label simple:text)
@@ -47,7 +51,9 @@
   (princ-to-string (score-value (alloy:value label))))
 
 (presentations:define-update (ui score-label)
-  (label :text alloy:text))
+  (label
+   :text alloy:text
+   :pattern (chroma:color 1 1 1 (min 1 (* 1.5 (timeout alloy:renderable))))))
 
 (defmethod show ((label score-label) &key)
   (unless (alloy:layout-tree label)
