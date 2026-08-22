@@ -15,11 +15,25 @@
          (title (make-instance 'title :value "Settings"))
          (menu (make-instance 'alloy:vertical-linear-layout
                               :cell-margins (alloy:margins 5)
-							                :min-size (alloy:size 120 30))))
-    (alloy:represent "Music Volume" 'setting-label :focus-parent focus :layout-parent menu)
+							                :min-size (alloy:size 120 30)))
+         (settings-grid (make-instance 'alloy:grid-layout :layout-parent menu
+                                                   :row-sizes '(T) :col-sizes '(300 100))))
+    (alloy:enter title layout :constraints `((:center :w) (:top 100)))
+
+    ;; Settings control
+    (alloy:represent "Music Volume" 'setting-label
+                     :focus-parent focus
+                     :layout-parent settings-grid)
     (alloy:represent (setting :audio :volume :master)
      'alloy:ranged-slider :range '(0.0 . 1.0) :step 0.1
-                          :focus-parent focus :layout-parent menu)
+                          :focus-parent focus :layout-parent settings-grid)
+    (alloy:represent "Debug mode" 'setting-label
+                     :focus-parent focus
+                     :layout-parent settings-grid)
+    (alloy:represent (setting :general :debug-mode)
+     'alloy:checkbox :focus-parent focus :layout-parent settings-grid)
+
+    ;; Menu avigation controls
     (make-instance 'menu-button
                    :value "Back"
                    :focus-parent focus
@@ -33,9 +47,8 @@
                    :layout-parent menu
                    :on-activate (lambda ()
                                   (quit *context*)))
-    (alloy:enter title layout :constraints `((:center :w) (:top 100)))
     (alloy:enter menu layout
-                 :constraints `((:center :w) (:bottom 20) (:height 350) (:width 550)))
+                 :constraints '((:center :w) (:bottom 20) (:height 350) (:width 550)))
     (alloy:finish-structure settings-panel layout focus)))
 
 (defmethod setup-scene ((main main) (scene settings))

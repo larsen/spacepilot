@@ -29,7 +29,8 @@
 (defun launch (&rest args)
   (let ((*package* #.*package*))
     (setf +settings+
-          (copy-tree '(:audio (:latency 0.005
+          (copy-tree '(:general (:debug-mode nil)
+                       :audio (:latency 0.005
                                :backend :default
                                :device :default
                                :volume (:master 1.0
