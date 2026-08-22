@@ -16,6 +16,7 @@
   (setf (paused main) (if (paused main) nil T)))
 
 (defmethod setup-scene ((main main) (scene world))
+  (setf +map-key-events+ T)
   (enter (make-instance 'fps-counter) scene)
   ;; (enter (make-instance 'display-controller) scene)
   (observe! (size scene) :title "Entities in game")

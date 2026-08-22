@@ -45,6 +45,7 @@
         (ui (make-instance 'settings-ui))
         (combine (make-instance 'blend-pass :name 'blend-pass)))
     ;; Setup scene
+    (setf +map-key-events+ nil)
     (enter (make-instance 'starfield-menu :star-count 750) scene)
     (enter (make-instance 'player-spaceship-for-menu) scene)
     (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
