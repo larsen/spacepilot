@@ -29,6 +29,55 @@
   (label
    :text alloy:text))
 
+(defclass score-label (alloy:direct-value-component alloy:label)
+  ((timeout :initarg :timeout :initform 5.0 :accessor timeout)))
+
+(defmethod animation:update :after ((label score-label) dt)
+  (if (> (timeout label) 0.0)
+      (progn
+        (decf (timeout label) dt)
+        (alloy:mark-for-render label))
+      (hide label)))
+
+(presentations:define-realization (ui score-label)
+  ((label simple:text)
+   (alloy:margins -10)
+   alloy:text
+   :size (alloy:un 25)
+   :font "PromptFont"
+   :pattern (chroma:color 1 1 1 1)
+   :halign :center
+   :valign :top))
+
+(defmethod alloy:text ((label score-label))
+  (princ-to-string (score-value (alloy:value label))))
+
+(presentations:define-update (ui score-label)
+  (label
+   :text alloy:text
+   :pattern (chroma:color 1 1 1 (max 0 (/ (timeout alloy:renderable) 5.0)))))
+
+(defmethod show ((label score-label) &key)
+  (unless (alloy:layout-tree label)
+    (alloy:enter label (alloy:popups (alloy:layout-tree (node 'trial-alloy:ui T)))))
+  (alloy:with-unit-parent label
+    (let* ((target (alloy:value label))
+           (tloc (location target))
+           (screen-location (world-screen-pos (vec (vx tloc)
+                                                   (+ (vy tloc)
+                                                      (vy (bsize target))
+                                                      10))))
+           (size (alloy:suggest-size (alloy:px-size 100 10) label)))
+      (setf (alloy:bounds label)
+            (alloy:px-extent (- (vx screen-location) (/ (alloy:pxw size) 2))
+                             (+ (vy screen-location) (alloy:pxh size))
+                             (max 1 (alloy:pxw size))
+                             (max 1 (alloy:pxh size)))))))
+
+(defmethod hide ((label score-label))
+  (when (alloy:layout-tree label)
+    (alloy:leave label T)))
+
 
 (defclass icon (alloy:direct-value-component alloy:icon)
   ())

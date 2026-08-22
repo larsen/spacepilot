@@ -37,3 +37,11 @@
     (setf (spawn-timer world) 0)
     ;; This will make each individual enemy to enter the scene
     (make-instance 'squadron :scene +spaceships+)))
+
+(defun world-screen-pos (pos)
+  ;; TODO: it should also work in 3d, if I want to implement an
+  ;; alternative POV with a 3d camera
+  (let ((camera (camera (scene +main+))))
+    (let ((pos (v+ pos (v/ (vec2 (width *context*)
+                                 (height *context*)) 2))))
+      (v* (nv- pos (vxy (location camera))) 1.0 1))))
