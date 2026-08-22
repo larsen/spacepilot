@@ -33,9 +33,11 @@
   ((timeout :initarg :timeout :initform 5.0 :accessor timeout)))
 
 (defmethod animation:update :after ((label score-label) dt)
-  (when (> (timeout label) 0.0)
-    (decf (timeout label) dt)
-    (alloy:mark-for-render label)))
+  (if (> (timeout label) 0.0)
+      (progn
+        (decf (timeout label) dt)
+        (alloy:mark-for-render label))
+      (hide label)))
 
 (presentations:define-realization (ui score-label)
   ((label simple:text)
@@ -71,6 +73,10 @@
                              (+ (vy screen-location) (alloy:pxh size))
                              (max 1 (alloy:pxw size))
                              (max 1 (alloy:pxh size)))))))
+
+(defmethod hide ((label score-label))
+  (when (alloy:layout-tree label)
+    (alloy:leave label T)))
 
 
 (defclass icon (alloy:direct-value-component alloy:icon)
