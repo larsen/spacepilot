@@ -22,6 +22,22 @@
     (preload (// 'spacepilot-music 'background-music) world))
   world)
 
+(defmethod setup-scene ((main main) (scene world))
+  (setf +map-key-events+ T)
+  (enter (make-instance 'fps-counter) scene)
+  ;; (enter (make-instance 'display-controller) scene)
+  (observe! (size scene) :title "Entities in game")
+  (observe! (size +spaceships+) :title "Entities in spaceships bag")
+  (observe! (spawn-timer scene) :title "Spawn timer")
+  (observe! +player-speed+ :title "Player speed")
+  (let ((game (make-instance 'render-pass))
+        (ui (make-instance 'ui))
+        (combine (make-instance 'blend-pass :name 'blend-pass)))
+    (setup-world scene)
+    (enter (make-instance 'spacepilot-camera :location (vec 0 0 30)) scene)
+    (connect (port game 'color) (port combine 'a-pass) scene)
+    (connect (port ui 'color) (port combine 'b-pass) scene)))
+
 (define-handler (world tick :before) ()
   (do-scene-graph (obj world)
     ;; We should use proper frustum culling, but at the moment these checks don't work
@@ -37,6 +53,7 @@
     (setf (spawn-timer world) 0)
     ;; This will make each individual enemy to enter the scene
     (make-instance 'squadron :scene +spaceships+)))
+
 
 (defun world-screen-pos (pos)
   ;; TODO: it should also work in 3d, if I want to implement an
