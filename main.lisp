@@ -26,10 +26,6 @@
            (issue scene 'post-tick :tt tt :dt dt :fc fc)))
     (process scene)))
 
-(define-handler (world scene-changed) ()
-  (trial-alloy:show-panel 'hud :player +player+)
-  (harmony:transition (// 'spacepilot-music 'background-music) :normal))
-
 (defun launch (&rest args)
   (let ((*package* #.*package*))
     (setf +settings+

@@ -38,6 +38,10 @@
     (connect (port game 'color) (port combine 'a-pass) scene)
     (connect (port ui 'color) (port combine 'b-pass) scene)))
 
+(define-handler (world scene-changed) ()
+  (trial-alloy:show-panel 'hud :player +player+)
+  (harmony:transition (// 'spacepilot-music 'background-music) :normal))
+
 (define-handler (world tick :before) ()
   (do-scene-graph (obj world)
     ;; We should use proper frustum culling, but at the moment these checks don't work
