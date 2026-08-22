@@ -44,6 +44,13 @@
                                   (setf +player+ NIL)
                                   (change-scene +main+ (make-instance 'settings))))
     (make-instance 'menu-button
+                   :value "Credits"
+                   :focus-parent focus
+                   :layout-parent menu
+                   :on-activate (lambda ()
+                                  (setf +player+ NIL)
+                                  (change-scene +main+ (make-instance 'credits))))
+    (make-instance 'menu-button
                    :value "Quit game"
                    :focus-parent focus
                    :layout-parent menu
