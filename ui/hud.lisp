@@ -33,7 +33,7 @@
   ((timeout :initarg :timeout :initform 5.0 :accessor timeout)))
 
 (defmethod animation:update :after ((label score-label) dt)
-  (when (< 0.0 (timeout element))
+  (when (> (timeout label) 0.0)
     (decf (timeout label) dt)
     (alloy:mark-for-render label)))
 
@@ -53,7 +53,7 @@
 (presentations:define-update (ui score-label)
   (label
    :text alloy:text
-   :pattern (chroma:color 1 1 1 (min 1 (* 1.5 (timeout alloy:renderable))))))
+   :pattern (chroma:color 1 1 1 (max 0 (/ (timeout alloy:renderable) 5.0)))))
 
 (defmethod show ((label score-label) &key)
   (unless (alloy:layout-tree label)
