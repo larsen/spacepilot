@@ -16,9 +16,9 @@
                              (:file "bullet")
                              (:file "star")))
                (:file "explosion")
-               (:file "world")
                (:file "commands")
                (:file "main")
+               (:file "world")
                (:module "ui"
                 :components ((:file "general")
                              (:file "main-menu")

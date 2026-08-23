@@ -24,9 +24,17 @@
     (alloy:represent "Music Volume" 'setting-label
                      :focus-parent focus
                      :layout-parent settings-grid)
-    (alloy:represent (setting :audio :volume :master)
+    (alloy:represent (setting :audio :volume :music)
      'alloy:ranged-slider :range '(0.0 . 1.0) :step 0.1
                           :focus-parent focus :layout-parent settings-grid)
+
+    (alloy:represent "SFX Volume" 'setting-label
+                     :focus-parent focus
+                     :layout-parent settings-grid)
+    (alloy:represent (setting :audio :volume :effect)
+     'alloy:ranged-slider :range '(0.0 . 1.0) :step 0.1
+                          :focus-parent focus :layout-parent settings-grid)
+
     (alloy:represent "Debug mode" 'setting-label
                      :focus-parent focus
                      :layout-parent settings-grid)
