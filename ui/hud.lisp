@@ -30,7 +30,8 @@
    :text alloy:text))
 
 (defclass score-label (alloy:direct-value-component alloy:label)
-  ((timeout :initarg :timeout :initform 5.0 :accessor timeout)))
+  ((format :initform nil :initarg :format :accessor score-format)
+   (timeout :initarg :timeout :initform 5.0 :accessor timeout)))
 
 (defmethod animation:update :after ((label score-label) dt)
   (if (> (timeout label) 0.0)
@@ -50,7 +51,9 @@
    :valign :top))
 
 (defmethod alloy:text ((label score-label))
-  (princ-to-string (score-value (alloy:value label))))
+  (if (null (score-format label))
+      (princ-to-string (score-value (alloy:value label)))
+      (format nil (score-format label) (score-value (alloy:value label)))))
 
 (presentations:define-update (ui score-label)
   (label

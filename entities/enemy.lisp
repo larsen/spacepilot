@@ -20,6 +20,7 @@
 (define-shader-entity enemy (spaceship auto-fire)
   ((color :initform (vec 1 0 0 1))
    (name :initform (string (gensym)))
+   (squadron :initarg :squadron :accessor squadron)
    (score-value :initform 10 :accessor score-value)
    (score-label :initform nil :accessor score-label)
    (vertex-array :initform (// 'spacepilot 'enemy-spaceship '(0 . 1)))))
@@ -59,24 +60,48 @@
           (leave enemy scene)
           (die player))))))
 
-(defclass squadron ()
-  ((scene :initform (error "You must provide a scene")
+(defclass squadron (located-entity sized-entity)
+  ((score-value :initform 50 :accessor score-value)
+   (score-label :initform nil :accessor score-label)
+   (scene :initform (error "You must provide a scene")
           :initarg :scene
           :accessor scene)))
 
 (defmethod initialize-instance :after ((squadron squadron) &key)
-  (let* ((lead (make-instance 'enemy))
+  (let* ((lead (make-instance 'enemy :squadron squadron))
          (lead-location (location lead))
          (lead-orientation (orientation lead))
          (lead-direction (q* lead-orientation +vy3+))
          (perpendicular (nv* (vunit (vc lead-direction (vec3 0 0 1))) 3)))
     (enter lead (scene squadron))
     ;; FIXME: it doesn't work when there are more than 3 ships (total)
+    (setf (location squadron) (location lead))
+    (setf (bsize squadron) (bsize lead))
+    (setf (score-label squadron)
+          (make-instance 'score-label
+                         :value squadron
+                         :format "COMBO! +~A"))
     (loop repeat 2
-          for ship = (make-instance 'enemy)
+          for ship = (make-instance 'enemy :squadron squadron)
           for offset from 1
           do (setf (location ship)
                    (v+ lead-location (nv* perpendicular offset)))
              (setf (orientation ship) lead-orientation)
              (setf (velocity ship) (velocity lead))
              (enter ship (scene squadron)))))
+
+(defun combo-bonus (enemy spaceships)
+  "When an enemy is killed, check if it was the last one in the squadron.
+If that's the case, give bonus score to the player"
+  (let* ((squadron (squadron enemy))
+         (scene (scene squadron))
+         (squadron-survivor-count 0))
+    (do-scene-graph (s spaceships)
+      (when (and (typep s 'enemy)
+                 (eql squadron (squadron s)))
+        (incf squadron-survivor-count)))
+    (when (zerop squadron-survivor-count)
+      (incf (score (node :player scene))
+            (score-value squadron))
+      (v:info :spapilot "BONUS!")
+      (show (score-label squadron)))))
