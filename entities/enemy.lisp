@@ -77,7 +77,10 @@
     ;; FIXME: it doesn't work when there are more than 3 ships (total)
     (setf (location squadron) (location lead))
     (setf (bsize squadron) (bsize lead))
-    (setf (score-label squadron) (make-instance 'score-label :value squadron))
+    (setf (score-label squadron)
+          (make-instance 'score-label
+                         :value squadron
+                         :format "COMBO! +~A"))
     (loop repeat 2
           for ship = (make-instance 'enemy :squadron squadron)
           for offset from 1
