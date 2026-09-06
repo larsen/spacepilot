@@ -40,6 +40,8 @@
                   starfield)))
 
 (define-handler (starfield-menu tick) ()
+  (when (setting :general :debug-mode)
+    (debug-draw (trial::frustum (camera (scene +main+)))))
   (do-scene-graph (obj starfield-menu)
     ;; We should use proper frustum culling, but at the moment these checks don't work
     ;; (not (in-view-p obj (camera starfield-menu)))

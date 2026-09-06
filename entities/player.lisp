@@ -13,7 +13,7 @@
 (alloy:make-observable '(setf score) '(value alloy:observable))
 
 (define-handler (player tick) (dt)
-  (when +debug+
+  (when (setting :general :debug-mode)
     (debug-draw (aref (physics-primitives player) 0)))
   (let ((movement (directional 'move))
         (rot (orientation player)))
@@ -28,7 +28,7 @@
   (fire player 'enemy))
 
 (defmethod die ((player player))
-  (unless +debug+
+  (unless (setting :general :debug-mode)
     (decf (lives player)))
   (if (zerop (lives player))
       (progn

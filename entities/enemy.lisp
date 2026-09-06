@@ -37,7 +37,7 @@
           (make-instance 'score-label :value enemy))))
 
 (define-handler (enemy tick) (dt)
-  (when +debug+
+  (when (setting :general :debug-mode)
     (debug-draw (aref (physics-primitives enemy) 0))
     (debug-text (v* (location enemy) 10.0)
                 (name enemy)
