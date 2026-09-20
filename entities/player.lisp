@@ -28,12 +28,9 @@
   (fire player 'enemy))
 
 (defmethod die ((player player))
-  (unless (setting :general :debug-mode)
-    (decf (lives player)))
+  (decf (lives player))
   (if (zerop (lives player))
-      (progn
-        (discard-events (scene +main+))
-        (change-scene +main+ (make-instance 'menu)))
+      (game-over)
       (progn
         (v:info :spacepilot "Player lives: ~a" (lives player))
         (discard-events (scene +main+))

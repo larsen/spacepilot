@@ -1,6 +1,21 @@
 (in-package #:spacepilot)
 
-(defclass world (pipelined-scene)
+(defclass timed-callback-handler-scene (scene)
+  ((callback-timer :initform nil :accessor callback-timer)))
+
+(defclass timer ()
+  ((timer-timeout :initarg :timeout :accessor timer)
+   (callback :initarg :callback :accessor callback)))
+
+(define-handler (timed-callback-handler-scene tick :after) (dt)
+  (when (callback-timer timed-callback-handler-scene)
+    (with-slots (timer-timeout callback)
+        (callback-timer timed-callback-handler-scene)
+      (decf timer-timeout dt)
+      (when (< timer-timeout 0)
+        (funcall callback)))))
+
+(defclass world (pipelined-scene timed-callback-handler-scene)
   ((enemy-spawn-timer :initform 0f0 :initarg :spawn-timer :accessor spawn-timer)))
 
 (defun ensure-player ()
@@ -43,6 +58,23 @@
   (trial-alloy:show-panel 'hud :player +player+)
   (harmony:transition (// 'spacepilot-music 'background-music) :normal))
 
+(defun game-over ()
+  (v:info :spacepilot "Game Over!")
+  (let ((scene (scene +main+)))
+    (trial-alloy:show-panel 'messages-hud)
+    (trial-alloy:hide-panel 'hud)
+    (leave (ensure-player) +spaceships+)
+    (enter (make-explosion (vec 0 0 0)) scene)
+    (harmony:play (// 'spacepilot-sound 'explosion))
+    (setf (callback-timer scene)
+          (make-instance 'timer
+                         :timeout 5.0
+                         :callback (lambda ()
+                                     (v:info :spacepilot "Timer ended! Game Over!")
+                                     (discard-events scene)
+                                     (change-scene +main+
+                                                   (make-instance 'menu)))))))
+
 (define-handler (world tick :before) ()
   (do-scene-graph (obj world)
     ;; We should use proper frustum culling, but at the moment these checks don't work
@@ -58,7 +90,6 @@
     (setf (spawn-timer world) 0)
     ;; This will make each individual enemy to enter the scene
     (make-instance 'squadron :scene +spaceships+)))
-
 
 (defun world-screen-pos (pos)
   ;; TODO: it should also work in 3d, if I want to implement an

@@ -82,6 +82,33 @@
     (alloy:leave label T)))
 
 
+(defclass big-banner (alloy:label alloy:direct-value-component)
+  ())
+
+(presentations:define-realization (ui big-banner)
+  ((label simple:text)
+   (alloy:margins -10)
+   alloy:text
+   :size (alloy:un 65)
+   :font "PromptFont"
+   :pattern (chroma:color 1 1 1 1)
+   :halign :center
+   :valign :top))
+
+(defmethod hide ((label big-banner))
+  (when (alloy:layout-tree label)
+    (alloy:leave label T)))
+
+(defclass messages-hud (trial-alloy:panel)
+  ())
+
+(defmethod initialize-instance :after ((messages-hud messages-hud) &key)
+  (let* ((layout (make-instance 'org.shirakumo.alloy.layouts.constraint:layout)))
+    (alloy:enter (make-instance 'big-banner :value "Game over!")
+                 layout :constraints `(:center (:fill :w) (:height 200)))
+    (alloy:finish-structure messages-hud layout NIL)))
+
+
 (defclass icon (alloy:direct-value-component alloy:icon)
   ())
 
@@ -89,7 +116,6 @@
   (:icon
    :image alloy:value
    :sizing :contain))
-
 
 (defclass hud (trial-alloy:panel)
   ())
